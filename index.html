@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="km">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>វិញ្ញាសាចំណេះដឹងទូទៅ និងវប្បធម៌ទូទៅភាគ៣</title>
+    <link rel="stylesheet" href="វប្បធម៌ទូទៅ1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;700&family=Khmer&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Kantumruy Pro', 'Khmer', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .quiz-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        max-width: 750px;
+        width: 100%;
+    }
+
+    h1 {
+        color: #1a73e8;
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        color: #5f6368;
+        text-align: center;
+        font-size: 1.1rem;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        color: #5f6368;
+        text-align: center;
+        font-size: 0.9rem;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+
+    .timer-box {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+        padding: 12px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-radius: 6px;
+        margin-bottom: 25px;
+        position: sticky;
+        top: 10px;
+        z-index: 100;
+    }
+
+    .timer-box.danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    .section-title {
+        background-color: #e8f0fe;
+        color: #1a73e8;
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-top: 35px;
+        margin-bottom: 15px;
+        border-left: 5px solid #1a73e8;
+    }
+
+    .question-block {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .question-title {
+        font-weight: bold;
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .options label {
+        display: block;
+        padding: 12px;
+        background-color: #f8f9fa;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+        border: 1px solid transparent;
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+
+    .options label:hover {
+        background-color: #e8f0fe;
+    }
+
+    .options input {
+        margin-right: 10px;
+    }
+
+    .options label.correct {
+        background-color: #d4edda !important;
+        border-color: #28a745;
+        color: #155724;
+        font-weight: bold;
+    }
+
+    .options label.incorrect {
+        background-color: #f8d7da !important;
+        border-color: #dc3545;
+        color: #721c24;
+    }
+
+    button {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 15px 20px;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background-color: #1557b0;
+    }
+
+    button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    #result {
+        margin-top: 25px;
+        padding: 20px;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: bold;
+        display: none;
+        background-color: #e2e3e5;
+        color: #383d41;
+        line-height: 1.6;
+    }
+
+    .explanation {
+        display: none;
+        margin-top: 15px;
+        padding: 15px;
+        background-color: #edf4fe;
+        border-left: 4px solid #1a73e8;
+        border-radius: 4px;
+        color: #202124;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+</style>
+
+<body>
+
+    <div class="quiz-container">
+        <h1>វិញ្ញាសាចំណេះដឹងទូទៅ និងវប្បធម៌ទូទៅ</h1>
+        <h2>កម្រងសំណួរជ្រើសរើស (១១១ សំណួរ) សម្រាប់ប្រឡងគ្រូបង្រៀនភាគ៣</h2>
+        <h3>រៀបរៀងដោយ៖ ហួច សេងហុង</h3>
+
+        <div id="timer" class="timer-box">ពេលវេលានៅសល់៖ 45:00</div>
+
+        <form id="quizForm">
+
+
+
+            <div class="question-block">
+                <div class="question-title">១. សម្តេចព្រះសង្ឃរាជ ជួន ណាត ប្រសូត្រនៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="A"> A. ១១ មីនា ១៨៨៣</label>
+                    <label><input type="radio" name="q1" value="B"> B. ១១ មីនា ១៨៨៥</label>
+                    <label><input type="radio" name="q1" value="C"> C. ២៥ កញ្ញា ១៩៦៩</label>
+                </div>
+                <div class="explanation" id="exp-q1"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២. សម្ដេចព្រះសង្ឃរាជ ជួន ណាត ប្រសូត្រនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="A"> A. ភូមិកំរៀង សង្កាត់រកាកោះ ស្រុកគងពិសី
+                        ខេត្តកំពង់ស្ពឺ</label>
+                    <label><input type="radio" name="q2" value="B"> B. ឃុំកំបូល ស្រុកអង្គស្នួល ខេត្តកណ្តាល</label>
+                    <label><input type="radio" name="q2" value="C"> C. ឃុំអង្គតាសោម ស្រុកត្រាំកក់ ខេត្តតាកែវ</label>
+                </div>
+                <div class="explanation" id="exp-q2"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣. សម្តេចព្រះសង្ឃរាជ ជួន ណាត បានបួសជាសាមណេរក្នុងព្រះជន្មាយុប៉ុន្មាន ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="A"> A. ១២ ព្រះវស្សា នៅវត្តឧណ្ណាលោម</label>
+                    <label><input type="radio" name="q3" value="B"> B. ១៤ ព្រះវស្សា នៅវត្តពោធិព្រឹក្ស</label>
+                    <label><input type="radio" name="q3" value="C"> C. ២១ ព្រះវស្សា នៅវត្តពោធិព្រឹក្ស</label>
+                </div>
+                <div class="explanation" id="exp-q3"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤. សម្តេចព្រះសង្ឃរាជ ជួន ណាត បានបំពេញឧបសម្បទាជាភិក្ខុក្នុងព្រះជន្មាយុប៉ុន្មាន
+                    និងមាននាមប្បញ្ញត្តិដូចម្តេច ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="A"> A. ២១ ព្រះវស្សា នៅវត្តពោធិព្រឹក្ស នាមប្បញ្ញត្តិ
+                        “ជោតញ្ញាណោ”</label>
+                    <label><input type="radio" name="q4" value="B"> B. ២១ ព្រះវស្សា នៅវត្តឧណ្ណាលោម នាមប្បញ្ញត្តិ
+                        “ជោតញ្ញាណោ”</label>
+                    <label><input type="radio" name="q4" value="C"> C. ២៥ ព្រះវស្សា នៅវត្តពោធិព្រឹក្ស នាមប្បញ្ញត្តិ
+                        “ជោតញ្ញាណោ”</label>
+                </div>
+                <div class="explanation" id="exp-q4"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥. សម្តេចព្រះសង្ឃរាជ ជួន ណាត បានឡើងតំណែងជាចៅអធិការវត្តឧណ្ណាលោម នៅឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="A"> A. ឆ្នាំ១៩២៣</label>
+                    <label><input type="radio" name="q5" value="B"> B. ឆ្នាំ១៩៤២</label>
+                    <label><input type="radio" name="q5" value="C"> C. ឆ្នាំ១៩៤៤</label>
+                </div>
+                <div class="explanation" id="exp-q5"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦. ស្នាដៃមួយរបស់សម្តេចព្រះសង្ឃរាជ ជួន ណាត ដែលកូនខ្មែរនៅចងចាំមិនភ្លេចនោះគឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="A"> A. ការបង្កើតវចនានុក្រមខ្មែរ</label>
+                    <label><input type="radio" name="q6" value="B"> B. ការនិពន្ធរឿងទាវឯក</label>
+                    <label><input type="radio" name="q6" value="C"> C. ការតាក់តែងច្បាប់ល្បើកថ្មី</label>
+                </div>
+                <div class="explanation" id="exp-q6"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧. សម្ដេចព្រះសង្ឃរាជ ជួន ណាត សុគតនៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="A"> A. ថ្ងៃទី១១ មីនា ១៨៨៣</label>
+                    <label><input type="radio" name="q7" value="B"> B. ថ្ងៃទី២៥ កញ្ញា ១៩៦៩</label>
+                    <label><input type="radio" name="q7" value="C"> C. ថ្ងៃទី០៨ កុម្ភៈ ១៩៤៧</label>
+                </div>
+                <div class="explanation" id="exp-q7"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨. លោកឧញ៉ាសន្ធរវោហារ ម៉ុក កើតក្នុងឆ្នាំណា និងនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="A"> A. ឆ្នាំ១៨៤៦ នៅក្រុងឧដុង្គ</label>
+                    <label><input type="radio" name="q8" value="B"> B. ឆ្នាំ១៨៦៥ នៅខេត្តកណ្តាល</label>
+                    <label><input type="radio" name="q8" value="C"> C. ឆ្នាំ១៨៧៤ នៅខេត្តតាកែវ</label>
+                </div>
+                <div class="explanation" id="exp-q8"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩. លោកឧញ៉ាសន្ធរវោហារ ម៉ុក ទទួលមរណភាពក្នុងឆ្នាំណា និងក្នុងជន្មាយុប៉ុន្មាន ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="A"> A. ឆ្នាំ១៩០៨ ក្នុងជន្មាយុ ៦២ ឆ្នាំ</label>
+                    <label><input type="radio" name="q9" value="B"> B. ឆ្នាំ១៩៣៦ ក្នុងជន្មាយុ ៧១ ឆ្នាំ</label>
+                    <label><input type="radio" name="q9" value="C"> C. ឆ្នាំ១៩៤៧ ក្នុងជន្មាយុ ៧៣ ឆ្នាំ</label>
+                </div>
+                <div class="explanation" id="exp-q9"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០. កំណាព្យ «ឆ្កែឆ្កួតបោលឆ្កួតកន្ទុយឆ្អឹង... អាចឹកកន្រ្តាក់បានសាច់ខ្វេ...»
+                    ជាស្នាដៃរបស់លោកអ្នកណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="A"> A. លោកតាក្រមង៉ុយ</label>
+                    <label><input type="radio" name="q10" value="B"> B. លោកឧញ៉ាសន្ធរវោហារ ម៉ុក</label>
+                    <label><input type="radio" name="q10" value="C"> C. លោកឧកញ៉ាវិបុលរាជសេនា នូ កន</label>
+                </div>
+                <div class="explanation" id="exp-q10"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១១. អំពើដែលកើតឡើងដោយមិនបានព្រៀងទុកជាមុនហៅថា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="A"> A. អំពើឆន្ទៈ</label>
+                    <label><input type="radio" name="q11" value="B"> B. អំពើអឆន្ទៈ</label>
+                    <label><input type="radio" name="q11" value="C"> C. អំពើអសីលធម៌</label>
+                </div>
+                <div class="explanation" id="exp-q11"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១២. លោកតាក្រមង៉ុយ កើតនៅឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="A"> A. ឆ្នាំ១៨៤៦</label>
+                    <label><input type="radio" name="q12" value="B"> B. ឆ្នាំ១៨៦៥</label>
+                    <label><input type="radio" name="q12" value="C"> C. ឆ្នាំ១៨៧៤</label>
+                </div>
+                <div class="explanation" id="exp-q12"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១៣. លោកតាក្រមង៉ុយ កើតនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="A"> A. ភូមិកំរៀង ស្រុកគងពិសី ខេត្តកំពង់ស្ពឺ</label>
+                    <label><input type="radio" name="q13" value="B"> B. ឃុំកំបូល ស្រុកអង្គស្នួល ខេត្តកណ្តាល</label>
+                    <label><input type="radio" name="q13" value="C"> C. ឃុំអង្គតាសោម ស្រុកត្រាំកក់ ខេត្តតាកែវ</label>
+                </div>
+                <div class="explanation" id="exp-q13"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១៤. លោកតាក្រមង៉ុយ មាននាមដើមថាដូចម្តេច ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="A"> A. អ៊ុក អ៊ូ</label>
+                    <label><input type="radio" name="q14" value="B"> B. នូ កន</label>
+                    <label><input type="radio" name="q14" value="C"> C. សន្ធរ ម៉ុក</label>
+                </div>
+                <div class="explanation" id="exp-q14"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១៥. លោកតាក្រមង៉ុយ ទទួលអនិច្ចកម្មនៅឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="A"> A. ឆ្នាំ១៩០៨</label>
+                    <label><input type="radio" name="q15" value="B"> B. ឆ្នាំ១៩៣៦</label>
+                    <label><input type="radio" name="q15" value="C"> C. ឆ្នាំ១៩៤៧</label>
+                </div>
+                <div class="explanation" id="exp-q15"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១៦. ស្នាដៃ «សេចក្តីរំឭកដាស់តឿន ច្បាប់កេរកាលថ្មី ច្បាប់ល្បើកថ្មី...»
+                    ជាស្នាដៃរបស់លោកអ្នកណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="A"> A. លោកតាក្រមង៉ុយ</label>
+                    <label><input type="radio" name="q16" value="B"> B. លោកឧញ៉ាសន្ធរវោហារ ម៉ុក</label>
+                    <label><input type="radio" name="q16" value="C"> C. លោកឧកញ៉ាវិបុលរាជសេនា នូ កន</label>
+                </div>
+                <div class="explanation" id="exp-q16"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១៧. លោកឧកញ៉ាវិបុលរាជសេនា នូ កន កើតក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="A"> A. ឆ្នាំ១៨៤៦</label>
+                    <label><input type="radio" name="q17" value="B"> B. ឆ្នាំ១៨៦៥</label>
+                    <label><input type="radio" name="q17" value="C"> C. ឆ្នាំ១៨៧៤</label>
+                </div>
+                <div class="explanation" id="exp-q17"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១៨. លោកឧកញ៉ាវិបុលរាជសេនា នូ កន កើតនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="A"> A. ឃុំកំបូល ស្រុកអង្គស្នួល ខេត្តកណ្តាល</label>
+                    <label><input type="radio" name="q18" value="B"> B. ឃុំអង្គតាសោម ស្រុកត្រាំកក់ ខេត្តតាកែវ</label>
+                    <label><input type="radio" name="q18" value="C"> C. ភូមិកំរៀង ស្រុកគងពិសី ខេត្តកំពង់ស្ពឺ</label>
+                </div>
+                <div class="explanation" id="exp-q18"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១៩. ស្នាដៃអក្សរសិល្ប៍ «រឿងទាវឯក» សរសេរជាបទពាក្យ៨ ក្នុងឆ្នាំ១៩២៣
+                    ជាស្នាដៃរបស់លោកអ្នកណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="A"> A. លោកតាក្រមង៉ុយ</label>
+                    <label><input type="radio" name="q19" value="B"> B. លោកឧញ៉ាសន្ធរវោហារ ម៉ុក</label>
+                    <label><input type="radio" name="q19" value="C"> C. លោកឧកញ៉ាវិបុលរាជសេនា នូ កន</label>
+                </div>
+                <div class="explanation" id="exp-q19"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២០. លោកឧកញ៉ាវិបុលរាជសេនា នូ កន ទទួលអនិច្ចកម្មនៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="A"> A. ថ្ងៃទី២៥ កញ្ញា ១៩៦៩ ជន្មាយុ ៨៦ ឆ្នាំ</label>
+                    <label><input type="radio" name="q20" value="B"> B. ថ្ងៃទី០៨ កុម្ភៈ ១៩៤៧ វេលាម៉ោង ៨យប់ ជន្មាយុ
+                        ៧៣ឆ្នាំ</label>
+                    <label><input type="radio" name="q20" value="C"> C. ថ្ងៃទី១១ មីនា ១៨៨៣ ជន្មាយុ ៦២ ឆ្នាំ</label>
+                </div>
+                <div class="explanation" id="exp-q20"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">២១. ម្ចាស់ស្នាដៃកំណាព្យអប់រំ “ច្បាប់ស្រី និងច្បាប់ប្រុស” គឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q21" value="A"> A. ភិរម្យភាសាអ៊ូ (ក្រមង៉ុយ)</label>
+                    <label><input type="radio" name="q21" value="B"> B. បណ្ឌិតម៉ឺន មៃ</label>
+                    <label><input type="radio" name="q21" value="C"> C. លោកឧកញ៉ាសុត្តន្តប្រីជាឥន្ទ</label>
+                </div>
+                <div class="explanation" id="exp-q21"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២២. លោកសាស្ត្រាចារ្យ នួន កន កើតក្នុងថ្ងៃខែឆ្នាំណា និងនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q22" value="A"> A. ថ្ងៃទី១៨ មិថុនា ១៩៣៤ នៅរាជធានីភ្នំពេញ</label>
+                    <label><input type="radio" name="q22" value="B"> B. ថ្ងៃទី២២ មិថុនា ១៩០៣ នៅខេត្តបាត់ដំបង</label>
+                    <label><input type="radio" name="q22" value="C"> C. ថ្ងៃទី២៦ មិថុនា ១៩១៦ នៅខេត្តបាត់ដំបង</label>
+                </div>
+                <div class="explanation" id="exp-q22"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២៣. ម្ចាស់ស្នាដៃបទចម្រៀង “ពង្សាវតារខ្មែរ” គឺលោកអ្នកណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q23" value="A"> A. លោក ឌឹក គាម</label>
+                    <label><input type="radio" name="q23" value="B"> B. លោកសាស្ត្រាចារ្យ នួន កន</label>
+                    <label><input type="radio" name="q23" value="C"> C. លោក នូ ហាច</label>
+                </div>
+                <div class="explanation" id="exp-q23"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២៤. ស្នាដៃបទ “ពង្សាវតារខ្មែរ” ត្រូវបាននិពន្ធឡើងនៅពេលណា និងតាមលំនាំបទអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q24" value="A"> A. ថ្ងៃទី១២ កញ្ញា ១៩៥៨ តាមលំនាំបទស្រីខ្មែរត្បាញ</label>
+                    <label><input type="radio" name="q24" value="B"> B. ថ្ងៃទី១២ កញ្ញា ១៩៦០ តាមលំនាំបទរាំក្បាច់</label>
+                    <label><input type="radio" name="q24" value="C"> C. ថ្ងៃទី២៥ កញ្ញា ១៩៥៨ តាមលំនាំបទសរភញ្ញ</label>
+                </div>
+                <div class="explanation" id="exp-q24"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២៥. លោកសាស្ត្រាចារ្យ នួន កន ទទួលអនិច្ចកម្មនៅពេលណា និងនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q25" value="A"> A. ថ្ងៃទី៣១ មីនា ២០០២ នៅឡុងប៊ិច សហរដ្ឋអាមេរិក ក្នុងជន្មាយុ
+                        ៦៨ឆ្នាំ</label>
+                    <label><input type="radio" name="q25" value="B"> B. ថ្ងៃទី០៨ វិច្ឆិកា ១៩២៤ នៅភ្នំពេញ ក្នុងជន្មាយុ
+                        ៦៥ឆ្នាំ</label>
+                    <label><input type="radio" name="q25" value="C"> C. ថ្ងៃទី២៦ ខែមេសា ១៩៧៥ នៅខេត្តបាត់ដំបង ក្នុងជន្មាយុ
+                        ៥៩ឆ្នាំ</label>
+                </div>
+                <div class="explanation" id="exp-q25"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២៦. លោកឧកញ៉ាសុត្តន្តប្រីជាឥន្ទ កើតក្នុងថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q26" value="A"> A. ថ្ងៃទី២២ កក្កដា ឆ្នាំ១៨៥៩</label>
+                    <label><input type="radio" name="q26" value="B"> B. ថ្ងៃទី១៨ មិថុនា ឆ្នាំ១៩៣៤</label>
+                    <label><input type="radio" name="q26" value="C"> C. ថ្ងៃទី០៩ កក្កដា ឆ្នាំ១៩៣០</label>
+                </div>
+                <div class="explanation" id="exp-q26"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២៧. លោកឧកញ៉ាសុត្តន្តប្រីជាឥន្ទ កើតនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q27" value="A"> A. ឃុំកំព្រៅ ស្រុកស៊ីធរកណ្តាល ខេត្តព្រៃវែង</label>
+                    <label><input type="radio" name="q27" value="B"> B. ភូមិរកាកោង ស្រុកមុខកំពូល ខេត្តកណ្តាល</label>
+                    <label><input type="radio" name="q27" value="C"> C. ឃុំស្វាយប៉ោ ស្រុកសង្កែ ខេត្តបាត់ដំបង</label>
+                </div>
+                <div class="explanation" id="exp-q27"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២៨. លោកឧកញ៉ាសុត្តន្តប្រីជាឥន្ទ ទទួលអនិច្ចកម្មនៅពេលណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q28" value="A"> A. ថ្ងៃទី០៨ វិច្ឆិកា ឆ្នាំ១៩២៤ វេលាម៉ោង ៨ព្រឹក</label>
+                    <label><input type="radio" name="q28" value="B"> B. ថ្ងៃទី៣១ មីនា ឆ្នាំ២០០២ វេលាម៉ោង ៩ព្រឹក</label>
+                    <label><input type="radio" name="q28" value="C"> C. ថ្ងៃទី២២ មិថុនា ឆ្នាំ១៩៧៤ វេលាម៉ោង ៨យប់</label>
+                </div>
+                <div class="explanation" id="exp-q28"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">២៩. ព្រះបទុមត្ថេរ សោម ឬងួន សោម ប្រសូត្រក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q29" value="A"> A. ឆ្នាំ ១៨៤៦</label>
+                    <label><input type="radio" name="q29" value="B"> B. ឆ្នាំ ១៨៥២</label>
+                    <label><input type="radio" name="q29" value="C"> C. ឆ្នាំ ១៨៥៩</label>
+                </div>
+                <div class="explanation" id="exp-q29"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣០. ព្រះបទុមត្ថេរ សោម ឬងួន សោម ប្រសូត្រនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q30" value="A"> A. ឃុំកំព្រៅ ស្រុកស៊ីធរកណ្តាល ខេត្តព្រៃវែង</label>
+                    <label><input type="radio" name="q30" value="B"> B. ភូមិរកាកោង ស្រុកមុខកំពូល ខេត្តកណ្តាល</label>
+                    <label><input type="radio" name="q30" value="C"> C. ឃុំកំពង់ព្រះ ស្រុកសង្កែ ខេត្តបាត់ដំបង</label>
+                </div>
+                <div class="explanation" id="exp-q30"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣១. ស្នាព្រះហស្ថព្រះបទុមត្ថេរ សោម ដែលអ្នកសិក្សាចងចាំមិនភ្លេច គឺ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q31" value="A"> A. រឿងទាវឯក និពន្ធឆ្នាំ១៩២៣</label>
+                    <label><input type="radio" name="q31" value="B"> B. រឿងទុំទាវ និពន្ធឆ្នាំ១៩១៥ ជាបទពាក្យ៧
+                        ចំនួន១០៥០ល្បះ</label>
+                    <label><input type="radio" name="q31" value="C"> C. រឿងកុលាបប៉ៃលិន និពន្ធឆ្នាំ១៩៣៦</label>
+                </div>
+                <div class="explanation" id="exp-q31"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣២. ព្រះបទុមត្ថេរ សោម សុគតនៅក្នុងឆ្នាំណា និងក្នុងព្រះជន្មាយុប៉ុន្មាន ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q32" value="A"> A. ឆ្នាំ១៩២៤ ក្នុងព្រះជន្មាយុ ៧២ ព្រះវស្សា</label>
+                    <label><input type="radio" name="q32" value="B"> B. ឆ្នាំ១៩៣២ ក្នុងព្រះជន្មាយុ ៨០ ព្រះវស្សា</label>
+                    <label><input type="radio" name="q32" value="C"> C. ឆ្នាំ១៩៧៤ ក្នុងព្រះជន្មាយុ ៨៥ ព្រះវស្សa</label>
+                </div>
+                <div class="explanation" id="exp-q32"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣៣. លោក ញ៉ុក ថែម កើតនៅក្នុងថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q33" value="A"> A. ថ្ងៃទី២២ មិថុនា ១៩០៣</label>
+                    <label><input type="radio" name="q33" value="B"> B. ថ្ងៃទី២២ កក្កដា ១៨៥៩</label>
+                    <label><input type="radio" name="q33" value="C"> C. ថ្ងៃទី១៨ មិថុនា ១៩៣៤</label>
+                </div>
+                <div class="explanation" id="exp-q33"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣៤. លោក ញ៉ុក ថែម កើតនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q34" value="A"> A. ឃុំកំបូល ស្រុកអង្គស្នួល ខេត្តកណ្តាល</label>
+                    <label><input type="radio" name="q34" value="B"> B. ឃុំស្វាយប៉ោ ស្រុកសង្កែ ខេត្តបាត់ដំបង
+                        (បច្ចុប្បន្នជាសង្កាត់ស្វាយប៉ោ ក្រុងបាត់ដំបង)</label>
+                    <label><input type="radio" name="q34" value="C"> C. ឃុំកំពង់ព្រះ ស្រុកសង្កែ ខេត្តបាត់ដំបង</label>
+                </div>
+                <div class="explanation" id="exp-q34"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣៥. ស្នាដៃលោក ញ៉ុក ថែម ដែលល្បីល្បាញជាងគេបំផុតគឺរឿងអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q35" value="A"> A. រឿងផ្កាស្រពោន</label>
+                    <label><input type="radio" name="q35" value="B"> B. រឿងកុលាបប៉ៃលិន</label>
+                    <label><input type="radio" name="q35" value="C"> C. រឿងព្រះអាទិត្យថ្មីរះលើផែនដីចាស់</label>
+                </div>
+                <div class="explanation" id="exp-q35"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣៦. លោក ញ៉ុក ថែម ទទួលអនិច្ចកម្មនៅក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q36" value="A"> A. ឆ្នាំ១៩៦៩</label>
+                    <label><input type="radio" name="q36" value="B"> B. ឆ្នាំ១៩៧៤</label>
+                    <label><input type="radio" name="q36" value="C"> C. ឆ្នាំ១៩៧៥</label>
+                </div>
+                <div class="explanation" id="exp-q36"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣៧. លោក នូ ហាច កើតនៅក្នុងថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q37" value="A"> A. ថ្ងៃទី២៦ មិថុនា ១៩១៦</label>
+                    <label><input type="radio" name="q37" value="B"> B. ថ្ងៃទី២២ មិថុនា ១៩០៣</label>
+                    <label><input type="radio" name="q37" value="C"> C. ថ្ងៃទី០៩ កក្កដា ១៩៣០</label>
+                </div>
+                <div class="explanation" id="exp-q37"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣៨. លោក នូ ហាច កើតនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q38" value="A"> A. ឃុំស្វាយប៉ោ ស្រុកសង្កែ ខេត្តបាត់ដំបង</label>
+                    <label><input type="radio" name="q38" value="B"> B. ឃុំកំពង់ព្រះ ស្រុកសង្កែ ខេត្តបាត់ដំបង</label>
+                    <label><input type="radio" name="q38" value="C"> C. ស្រុកមោងឫស្សី ខេត្តបាត់ដំបង</label>
+                </div>
+                <div class="explanation" id="exp-q38"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៣៩. ស្នាដៃដ៏ល្បីល្បាញរបស់លោក នូ ហាច គឺរឿងអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q39" value="A"> A. រឿងផ្កាស្រពោន (និពន្ធឆ្នាំ១៩៤៧
+                        បោះពុម្ពឆ្នាំ១៩៤៩)</label>
+                    <label><input type="radio" name="q39" value="B"> B. រឿងកុលាបប៉ៃលិន (និពន្ធឆ្នាំ១៩៣៦)</label>
+                    <label><input type="radio" name="q39" value="C"> C. រឿងព្រះអាទិត្យថ្មីរះលើផែនដីចាស់
+                        (និពន្ធឆ្នាំ១៩៦០)</label>
+                </div>
+                <div class="explanation" id="exp-q39"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤០. លោក នូ ហាច ទទួលអនិច្ចកម្មដោយសារមូលហេតុអ្វី និងនៅពេលណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q40" value="A"> A. ទទួលអនិច្ចកម្មដោយជរាពាធនៅឆ្នាំ១៩៧៤</label>
+                    <label><input type="radio" name="q40" value="B"> B. ត្រូវបានពួកខ្មែរក្រហមសម្លាប់នៅខែមេសា ឆ្នាំ១៩៧៥</label>
+                    <label><input type="radio" name="q40" value="C"> C. ទទួលអនិច្ចកម្មដោយរោគាពាធនៅឆ្នាំ២០០២</label>
+                </div>
+                <div class="explanation" id="exp-q40"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤១. លោក សួន សុរិន្ទ កើតក្នុងថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q41" value="A"> A. ថ្ងៃទី០៩ កក្កដា ១៩៣០</label>
+                    <label><input type="radio" name="q41" value="B"> B. ថ្ងៃទី១៨ មិថុនា ១៩៣៤</label>
+                    <label><input type="radio" name="q41" value="C"> C. ថ្ងៃទី០៥ មករា ១៩៣៦</label>
+                </div>
+                <div class="explanation" id="exp-q41"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤២. លោក សួន សុរិន្ទ កើតនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q42" value="A"> A. ស្រុកបាទី ខេត្តតាកែវ</label>
+                    <label><input type="radio" name="q42" value="B"> B. ស្រុកសង្កែ ខេត្តបាត់ដំបង</label>
+                    <label><input type="radio" name="q42" value="C"> C. ស្រុកឆ្លូង ខេត្តក្រចេះ</label>
+                </div>
+                <div class="explanation" id="exp-q42"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤៣. ស្នាដៃដ៏ល្បីល្បាញរបស់លោក សួន សុរិន្ទ ដែលទទួលបានពានរង្វាន់ឥន្ទ្រទេវីលើកទី១
+                    គឺរឿងអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q43" value="A"> A. រឿងគូលីកំណែន</label>
+                    <label><input type="radio" name="q43" value="B"> B. រឿងព្រះអាទិត្យថ្មីរះលើផែនដីចាស់
+                        (និពន្ធឆ្នាំ១៩៦០-១៩៦១)</label>
+                    <label><input type="radio" name="q43" value="C"> C. រឿងភូមិតិរច្ឆាន</label>
+                </div>
+                <div class="explanation" id="exp-q43"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤៤. ស្នាដៃដ៏ល្បីល្បាញរបស់លោក អ៊ឹម ថុក គឺរឿងអ្វី និងនិពន្ធឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q44" value="A"> A. រឿងគូលីកំណែន និពន្ធនៅឆ្នាំ១៩៥៦</label>
+                    <label><input type="radio" name="q44" value="B"> B. រឿងភូមិតិរច្ឆាន និពន្ធនៅឆ្នាំ១៩៦៤</label>
+                    <label><input type="radio" name="q44" value="C"> C. រឿងតេជោយ៉ត និពន្ធនៅឆ្នាំ១៩៨៣</label>
+                </div>
+                <div class="explanation" id="exp-q44"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤៥. លោក ឌឿក អំ កើតក្នុងឆ្នាំណា និងនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q45" value="A"> A. ឆ្នាំ១៩៣៤ នៅស្រុកមោងឫស្សី ខេត្តបាត់ដំបង</label>
+                    <label><input type="radio" name="q45" value="B"> B. ឆ្នាំ១៩៣៦ នៅស្រុកឆ្លូង ខេត្តក្រចេះ</label>
+                    <label><input type="radio" name="q45" value="C"> C. ឆ្នាំ១៩៥២ នៅស្រុកបាទី ខេត្តតាកែវ</label>
+                </div>
+                <div class="explanation" id="exp-q45"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤៦. លោក ឌឹក គាម កើតក្នុងថ្ងៃខែឆ្នាំណា និងនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q46" value="A"> A. ថ្ងៃទី០៩ កក្កដា ១៩៣០ នៅខេត្តបាត់ដំបង</label>
+                    <label><input type="radio" name="q46" value="B"> B. ថ្ងៃទី០៥ មករា ១៩៣៦ នៅសង្កាត់ឫស្សីកែវ ស្រុកឆ្លូង
+                        ខេត្តក្រចេះ</label>
+                    <label><input type="radio" name="q46" value="C"> C. ថ្ងៃទី១០ កុម្ភៈ ១៩៥២ នៅខេត្តតាកែវ</label>
+                </div>
+                <div class="explanation" id="exp-q46"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤៧. ស្នាដៃដ៏ល្បីល្បាញដែលជាការសហការនិពន្ធដោយលោក ឌឹក គាម និងលោក ឌឹក អំ គឺរឿងអ្វី ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q47" value="A"> A. រឿងគូលីកំណែន</label>
+                    <label><input type="radio" name="q47" value="B"> B. រឿងភូមិតិរច្ឆាន (និពន្ធឆ្នាំ១៩៦៤-១៩៦៥)</label>
+                    <label><input type="radio" name="q47" value="C"> C. រឿងតេជោយ៉ត</label>
+                </div>
+                <div class="explanation" id="exp-q47"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤៨. ស្នាដៃដ៏ល្បីល្បាញរបស់លោក យស ងិន គឺរឿងអ្វី និងនិពន្ធក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q48" value="A"> A. រឿងចៅស្រទបចេក និពន្ធក្នុងឆ្នាំ១៨៨៩</label>
+                    <label><input type="radio" name="q48" value="B"> B. រឿងទុំទាវ និពន្ធក្នុងឆ្នាំ១៩១៥</label>
+                    <label><input type="radio" name="q48" value="C"> C. រឿងទាវឯក និពន្ធក្នុងឆ្នាំ១៩២៣</label>
+                </div>
+                <div class="explanation" id="exp-q48"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៤៩. លោក ទី ជីហួត កើតក្នុងថ្ងៃខែឆ្នាំណា និងនៅទីណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q49" value="A"> A. ថ្ងៃទី១០ កុម្ភៈ ១៩៥២ នៅស្រុកបាទី ខេត្តតាកែវ</label>
+                    <label><input type="radio" name="q49" value="B"> B. ថ្ងៃទី០៥ មករា ១៩៣៦ នៅស្រុកឆ្លូង ខេត្តក្រចេះ</label>
+                    <label><input type="radio" name="q49" value="C"> C. ថ្ងៃទី១៨ មិថុនា ១៩៣៤ នៅរាជធានីភ្នំពេញ</label>
+                </div>
+                <div class="explanation" id="exp-q49"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥០. ស្នាដៃដ៏ល្បីល្បាញរបស់លោក ទី ជីហួត គឺរឿងអ្វី និងនិពន្ធក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q50" value="A"> A. រឿងភូមិតិរច្ឆាន និពន្ធក្នុងឆ្នាំ១៩៦៤</label>
+                    <label><input type="radio" name="q50" value="B"> B. រឿងតេជោយ៉ត និពន្ធក្នុងឆ្នាំ១៩៨៣</label>
+                    <label><input type="radio" name="q50" value="C"> C. រឿងព្រះអាទិត្យថ្មីរះលើផែនដីចាស់
+                        និពន្ធក្នុងឆ្នាំ១៩៦០</label>
+                </div>
+                <div class="explanation" id="exp-q50"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៥១. នគរបាលយុត្តិធម៌អាចឃុំខ្លួនជនជាប់ចោទមិនលើសរយៈពេលប៉ុន្មាន ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q51" value="A"> A. ២៤ ម៉ោង</label>
+                    <label><input type="radio" name="q51" value="B"> B. ៤៨ ម៉ោង</label>
+                    <label><input type="radio" name="q51" value="C"> C. ៧២ ម៉ោង</label>
+                </div>
+                <div class="explanation" id="exp-q51"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥២. នៅក្នុងដំណើរការក្តី មេធាវីគឺជាអ្នកការពារ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q52" value="A"> A. ដើមបណ្តឹង</label>
+                    <label><input type="radio" name="q52" value="B"> B. តុលាការ</label>
+                    <label><input type="radio" name="q52" value="C"> C. កូនក្តីរបស់ខ្លួន</label>
+                </div>
+                <div class="explanation" id="exp-q52"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥៣. តើប្រាសាទអង្គរវត្តមានចម្ងាយប៉ុន្មានពីទីរួមខេត្តសៀមរាប ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q53" value="A"> A. ៥ គីឡូម៉ែត្រ</label>
+                    <label><input type="radio" name="q53" value="B"> B. ៧ គីឡូម៉ែត្រ</label>
+                    <label><input type="radio" name="q53" value="C"> C. ១០ គីឡូម៉ែត្រ</label>
+                </div>
+                <div class="explanation" id="exp-q53"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥៤. ប្រាសាទអង្គរវត្តកសាងឡើងដោយព្រះមហាក្សត្រអង្គណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q54" value="A"> A. ព្រះបាទជ័យវរ្ម័នទី៧</label>
+                    <label><input type="radio" name="q54" value="B"> B. ព្រះបាទសូរ្យវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q54" value="C"> C. ព្រះបាទយសោវរ្ម័នទី១</label>
+                </div>
+                <div class="explanation" id="exp-q54"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥៥. តើប្រាសាទអង្គរវត្តត្រូវបានកសាងឡើងនៅក្នុងសម័យកាលណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q55" value="A"> A. ដើមសតវត្សទី១២</label>
+                    <label><input type="radio" name="q55" value="B"> B. ចុងសតវត្សទី១២</label>
+                    <label><input type="radio" name="q55" value="C"> C. ដើមសតវត្សទី១៣</label>
+                </div>
+                <div class="explanation" id="exp-q55"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥៦. ប្រាសាទអង្គរវត្តកសាងឡើងដើម្បីឧទ្ទិសចំពោះអាទិទេពអង្គណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q56" value="A"> A. ព្រះសិវៈ (ព្រះឥសូរ)</label>
+                    <label><input type="radio" name="q56" value="B"> B. ព្រះវិស្ណុ (ព្រះនារាយណ៍)</label>
+                    <label><input type="radio" name="q56" value="C"> C. ព្រះពុទ្ធសាសនា</label>
+                </div>
+                <div class="explanation" id="exp-q56"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥៧. តើប្រាសាទអង្គរវត្តមានឈ្មោះដើមថាដូចម្តេច ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q57" value="A"> A. ប្រាសាទបរមវិស្ណុលោក</label>
+                    <label><input type="radio" name="q57" value="B"> B. ប្រាសាទឥសានបុរៈ</label>
+                    <label><input type="radio" name="q57" value="C"> C. ប្រាសាទយសោធរបុរៈ</label>
+                </div>
+                <div class="explanation" id="exp-q57"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥៨. តំបន់អង្គរត្រូវបានចុះក្នុងបញ្ជីបេតិកភណ្ឌពិភពលោកនៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q58" value="A"> A. ថ្ងៃទី១៤ ធ្នូ ១៩៩២</label>
+                    <label><input type="radio" name="q58" value="B"> B. ថ្ងៃទី០៧ កក្កដា ២០០៨</label>
+                    <label><input type="radio" name="q58" value="C"> C. ថ្ងៃទី០៨ កក្កដា ២០១៧</label>
+                </div>
+                <div class="explanation" id="exp-q58"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៥៩. តើប្រាសាទអង្គរវត្តមានកំពូលចំនួនប៉ុន្មាន ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q59" value="A"> A. កំពូល៣</label>
+                    <label><input type="radio" name="q59" value="B"> B. កំពូល៥</label>
+                    <label><input type="radio" name="q59" value="C"> C. កំពូល៩</label>
+                </div>
+                <div class="explanation" id="exp-q59"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦០. កំពូលទាំង៥ នៃប្រាសាទអង្គរវត្តតំណាងឱ្យអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q60" value="A"> A. ខេត្តក្រុងខ្មែរនាពេលនោះ</label>
+                    <label><input type="radio" name="q60" value="B"> B. កំពូលភ្នំព្រះសុមេរុ</label>
+                    <label><input type="radio" name="q60" value="C"> C. ព្រហ្មវិហារធម៌ទាំងបួន</label>
+                </div>
+                <div class="explanation" id="exp-q60"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦១. ប្រាសាទបាយ័នត្រូវបានកសាងឡើងសម្រាប់ឧទ្ទិសថ្វាយចំពោះសាសនាណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q61" value="A"> A. ព្រះពុទ្ធសាសនាមហាយាន</label>
+                    <label><input type="radio" name="q61" value="B"> B. ព្រះពុទ្ធសាសនាថេរវាទ</label>
+                    <label><input type="radio" name="q61" value="C"> C. ព្រហ្មញ្ញសាសនា</label>
+                </div>
+                <div class="explanation" id="exp-q61"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦២. តើប្រាសាទបាយ័នត្រូវបានកសាងឡើងនៅក្នុងកំឡុងពេលណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q62" value="A"> A. ដើមសតវត្សទី១២</label>
+                    <label><input type="radio" name="q62" value="B"> B. ដើមសតវត្សទី១៣</label>
+                    <label><input type="radio" name="q62" value="C"> C. ចុងសតវត្សទី១៣</label>
+                </div>
+                <div class="explanation" id="exp-q62"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦៣. តើប្រាសាទបាយ័នមានកំពូលទាំងអស់ចំនួនប៉ុន្មាន ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q63" value="A"> A. កំពូល៣៦</label>
+                    <label><input type="radio" name="q63" value="B"> B. កំពូល៤៩</label>
+                    <label><input type="radio" name="q63" value="C"> C. កំពូល៥៤</label>
+                </div>
+                <div class="explanation" id="exp-q63"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦៤. កំពូលទាំង៥៤ នៃប្រាសាទបាយ័នតំណាងឱ្យអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q64" value="A"> A. ខេត្តក្រុងខ្មែរនាពេលនោះ</label>
+                    <label><input type="radio" name="q64" value="B"> B. ឆ្នាំដែលកសាងប្រាសាទ</label>
+                    <label><input type="radio" name="q64" value="C"> C. ទេវតារក្សាទិសទាំងបួន</label>
+                </div>
+                <div class="explanation" id="exp-q64"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦៥. រូបព្រហ្មមុខ៤ នៃប្រាសាទបាយ័នតំណាងឱ្យអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q65" value="A"> A. ទិសធំៗទាំងបួន</label>
+                    <label><input type="radio" name="q65" value="B"> B. ព្រហ្មវិហារធម៌ទាំងបួន (មេត្តា ករុណា មុទិតា ឧបេក្ខា)</label>
+                    <label><input type="radio" name="q65" value="C"> C. កម្លាំងការពារចក្រភព</label>
+                </div>
+                <div class="explanation" id="exp-q65"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦៦. ប្រាសាទបាយ័នត្រូវបានកសាងឡើងដោយព្រះមហាក្សត្រអង្គណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q66" value="A"> A. ព្រះបាទជ័យវរ្ម័នទី៧</label>
+                    <label><input type="radio" name="q66" value="B"> B. ព្រះបាទសូរ្យវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q66" value="C"> C. ព្រះបាទឥន្ទ្រវរ្ម័នទី១</label>
+                </div>
+                <div class="explanation" id="exp-q66"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦៧. តើប្រាសាទព្រះវិហារត្រូវបានកសាងឡើងដោយព្រះមហាក្សត្រអង្គណាខ្លះ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q67" value="A"> A. ព្រះបាទយសោវរ្ម័នទី១ និងព្រះបាទជ័យវរ្ម័នទី៧</label>
+                    <label><input type="radio" name="q67" value="B"> B. ព្រះបាទយសោវរ្ម័នទី១ ព្រះបាទសូរ្យវរ្ម័នទី១
+                        និងព្រះបាទសូរ្យវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q67" value="C"> C. ព្រះបាទឥសានវរ្ម័នទី១ និងព្រះបាទជ័យវរ្ម័នទី៤</label>
+                </div>
+                <div class="explanation" id="exp-q67"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦៨. តើប្រាសាទព្រះវិហារត្រូវបានកសាងឡើងនៅក្នុងកំឡុងសតវត្សណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q68" value="A"> A. សតវត្សទី៧ ដល់ទី៩</label>
+                    <label><input type="radio" name="q68" value="B"> B. សតវត្សទី៩ ដល់ទី១២</label>
+                    <label><input type="radio" name="q68" value="C"> C. សតវត្សទី១២ ដល់ទី១៣</label>
+                </div>
+                <div class="explanation" id="exp-q68"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៦៩. ប្រាសាទព្រះវិហារកសាងឡើងដើម្បីឧទ្ទិសថ្វាយចំពោះអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q69" value="A"> A. ព្រះស្រីសិខារេស្វរៈ ឬអាទិទេពនៃកំពូលភ្នំ</label>
+                    <label><input type="radio" name="q69" value="B"> B. ព្រះពុទ្ធសាសនាមហាយាន</label>
+                    <label><input type="radio" name="q69" value="C"> C. បុព្វការីជននៃអាណាចក្រខ្មែរ</label>
+                </div>
+                <div class="explanation" id="exp-q69"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧០. ប្រាសាទព្រះវិហារត្រូវបានចុះក្នុងបញ្ជីបេតិកភណ្ឌពិភពលោកនៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q70" value="A"> A. ថ្ងៃទី១៤ ធ្នូ ១៩៩២</label>
+                    <label><input type="radio" name="q70" value="B"> B. ថ្ងៃទី០៧ កក្កដា ២០០៨</label>
+                    <label><input type="radio" name="q70" value="C"> C. ថ្ងៃទី០៨ កក្កដា ២០១៧</label>
+                </div>
+                <div class="explanation" id="exp-q70"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧១. ប្រាសាទសំបូរព្រៃគុកបានចុះក្នុងបញ្ជីបេតិកភណ្ឌពិភពលោកនៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q71" value="A"> A. ថ្ងៃទី០៧ កក្កដា ២០០៨</label>
+                    <label><input type="radio" name="q71" value="B"> B. ថ្ងៃទី០៨ កក្កដា ២០១៧</label>
+                    <label><input type="radio" name="q71" value="C"> C. ថ្ងៃទី១៧ កញ្ញា ២០២៣</label>
+                </div>
+                <div class="explanation" id="exp-q71"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧២. តើប្រាសាទសំបូរព្រៃគុកត្រូវបានកសាងឡើងនៅក្នុងសតវត្សណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q72" value="A"> A. សតវត្សទី៧</label>
+                    <label><input type="radio" name="q72" value="B"> B. សតវត្សទី៩</label>
+                    <label><input type="radio" name="q72" value="C"> C. សតវត្សទី១០</label>
+                </div>
+                <div class="explanation" id="exp-q72"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧៣. ប្រាសាទសំបូរព្រៃគុកកសាងឡើងដោយព្រះមហាក្សត្រអង្គណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q73" value="A"> A. ព្រះបាទជ័យវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q73" value="B"> B. ព្រះបាទឥសានវរ្ម័នទី១</label>
+                    <label><input type="radio" name="q73" value="C"> C. ព្រះបាទជ័យវរ្ម័នទី៤</label>
+                </div>
+                <div class="explanation" id="exp-q73"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧៤. ប្រាសាទសំបូរព្រៃគុកកសាងឡើងដើម្បីឧទ្ទិសថ្វាយចំពោះអាទិទេពណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q74" value="A"> A. ព្រះវិស្ណុ</label>
+                    <label><input type="radio" name="q74" value="B"> B. ព្រះសិវៈ ឬព្រះឥសូរ</label>
+                    <label><input type="radio" name="q74" value="C"> C. ព្រះពុទ្ធសាសនា</label>
+                </div>
+                <div class="explanation" id="exp-q74"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧៥. តើប្រាសាទសំបូរព្រៃគុកមានឈ្មោះដើមហៅថាដូចម្តេច ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q75" value="A"> A. យសោធរបុរៈ</label>
+                    <label><input type="radio" name="q75" value="B"> B. ឥសានបុរៈ</label>
+                    <label><input type="radio" name="q75" value="C"> C. ហរិហរាល័យ</label>
+                </div>
+                <div class="explanation" id="exp-q75"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧៦. តើប្រាសាទសំបូរព្រៃគុកស្ថិតនៅក្នុងខេត្តណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q76" value="A"> A. ខេត្តសៀមរាប</label>
+                    <label><input type="radio" name="q76" value="B"> B. ខេត្តកំពង់ធំ</label>
+                    <label><input type="radio" name="q76" value="C"> C. ខេត្តព្រះវិហារ</label>
+                </div>
+                <div class="explanation" id="exp-q76"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧៧. តើប្រាសាទកោះកេរមានទីតាំងស្ថិតនៅក្នុងភូមិសាស្ត្រណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q77" value="A"> A. ឃុំស្វាយប៉ោ ស្រុកសង្កែ ខេត្តបាត់ដំបង</label>
+                    <label><input type="radio" name="q77" value="B"> B. ភូមិស្រយ៉ង់ខាងជើង ឃុំស្រយ៉ង់ ស្រុកគូលែន
+                        ខេត្តព្រះវិហារ</label>
+                    <label><input type="radio" name="q77" value="C"> C. ភូមិរកាកោង ស្រុកមុខកំពូល ខេត្តកណ្តាល</label>
+                </div>
+                <div class="explanation" id="exp-q77"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧៨. តើប្រាសាទកោះកេរមានចម្ងាយប្រមាណប៉ុន្មានពីខេត្តសៀមរាប និងខេត្តព្រះវិហារ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q78" value="A"> A. ប្រមាណ ១២០ គីឡូម៉ែត្រពីទីរួមខេត្តសៀមរាប និងប្រមាណ ៦០
+                        គីឡូម៉ែត្រពីទីរួមខេត្តព្រះវិហារ</label>
+                    <label><input type="radio" name="q78" value="B"> B. ប្រមាណ ១៥០ គីឡូម៉ែត្រពីទីរួមខេត្តសៀមរាប និងប្រមាណ ៨០
+                        គីឡូម៉ែត្រពីទីរួមខេត្តព្រះវិហារ</label>
+                    <label><input type="radio" name="q78" value="C"> C. ប្រមាណ ៨០ គីឡូម៉ែត្រពីទីរួមខេត្តសៀមរាប និងប្រមាណ ១២០
+                        គីឡូម៉ែត្រពីទីរួមខេត្តព្រះវិហារ</label>
+                </div>
+                <div class="explanation" id="exp-q78"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៧៩. ប្រាសាទកោះកេរត្រូវបានកសាងឡើងដោយព្រះមហាក្សត្រអង្គណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q79" value="A"> A. ព្រះបាទសូរ្យវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q79" value="B"> B. ព្រះបាទជ័យវរ្ម័នទី៤</label>
+                    <label><input type="radio" name="q79" value="C"> C. ព្រះបាទជ័យវរ្ម័នទី៧</label>
+                </div>
+                <div class="explanation" id="exp-q79"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨០. តើប្រាសាទកោះកេរត្រូវបានកសាងឡើងនៅក្នុងសម័យកាលណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q80" value="A"> A. ក្នុងសតវត្សទី១០ (ឆ្នាំ៩២៨-ឆ្នាំ៩៤២)</label>
+                    <label><input type="radio" name="q80" value="B"> B. ក្នុងសតវត្សទី៧ (ឆ្នាំ៦១៥-ឆ្នាំ៦៣៥)</label>
+                    <label><input type="radio" name="q80" value="C"> C. ក្នុងសតវត្សទី១២ (ឆ្នាំ១១១៣-ឆ្នាំ១១៥០)</label>
+                </div>
+                <div class="explanation" id="exp-q80"></div>
+            </div>
+
+            <div class="question-block">
+                <div class="question-title">៨១. ប្រាសាទកោះកេរ ត្រូវបានកសាងឡើងដើម្បីឧទ្ទិសថ្វាយចំពោះអាទិទេពណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q81" value="A"> A. ព្រះវិស្ណុ (ព្រះនារាយណ៍)</label>
+                    <label><input type="radio" name="q81" value="B"> B. ព្រះឥសូរ (ព្រះសិវៈ)</label>
+                    <label><input type="radio" name="q81" value="C"> C. ព្រះព្រហ្ម</label>
+                </div>
+                <div class="explanation" id="exp-q81"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨២. តើប្រាសាទកោះកេរ (ប្រាសាទធំ) មានរាងជាអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q82" value="A"> A. ពីរ៉ាមីត</label>
+                    <label><input type="radio" name="q82" value="B"> B. ស៊ីឡាំង</label>
+                    <label><input type="radio" name="q82" value="C"> C. គូប</label>
+                </div>
+                <div class="explanation" id="exp-q82"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨៣. តើប្រាសាទកោះកេរមានថ្នាក់ ឬជាន់ចំនួនប៉ុន្មានជាន់ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q83" value="A"> A. ៥ ជាន់</label>
+                    <label><input type="radio" name="q83" value="B"> B. ៧ ជាន់</label>
+                    <label><input type="radio" name="q83" value="C"> C. ៩ ជាន់</label>
+                </div>
+                <div class="explanation" id="exp-q83"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨៤. តើប្រាសាទកោះកេរមានកម្ពស់ប្រមាណប៉ុន្មានម៉ែត្រ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q84" value="A"> A. ៣០ ម៉ែត្រ</label>
+                    <label><input type="radio" name="q84" value="B"> B. ៣៥ ម៉ែត្រ</label>
+                    <label><input type="radio" name="q84" value="C"> C. ៤០ ម៉ែត្រ</label>
+                </div>
+                <div class="explanation" id="exp-q84"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨៥. តើប្រាសាទបន្ទាយស្រីមានទីតាំងស្ថិតនៅក្នុងភូមិសាស្ត្រណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q85" value="A"> A. ស្រុកបន្ទាយស្រី ខេត្តសៀមរាប</label>
+                    <label><input type="radio" name="q85" value="B"> B. ស្រុកគូលែន ខេត្តព្រះវិហារ</label>
+                    <label><input type="radio" name="q85" value="C"> C. ស្រុកត្រាំកក់ ខេត្តតាកែវ</label>
+                </div>
+                <div class="explanation" id="exp-q85"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨៦. តើប្រាសាទបន្ទាយស្រីត្រូវបានកសាងឡើងនៅក្នុងរចនាបថអ្វី ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q86" value="A"> A. រចនាបថឃ្លាំង</label>
+                    <label><input type="radio" name="q86" value="B"> B. រចនាបថបន្ទាយស្រី</label>
+                    <label><input type="radio" name="q86" value="C"> C. រចនាបថកោះកេរ</label>
+                </div>
+                <div class="explanation" id="exp-q86"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨៧. ប្រាសាទបន្ទាយស្រីត្រូវបានកសាងឡើងដើម្បីឧទ្ទិសថ្វាយចំពោះអាទិទេពណាខ្លះ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q87" value="A"> A. ព្រះឥសូរ និងព្រះវិស្ណុ (ព្រះនរាយណ៍)</label>
+                    <label><input type="radio" name="q87" value="B"> B. ព្រះឥសូរ និងព្រះព្រហ្ម</label>
+                    <label><input type="radio" name="q87" value="C"> C. ព្រះពុទ្ធសាសនាមហាយាន</label>
+                </div>
+                <div class="explanation" id="exp-q87"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨៨. តើប្រាសាទបន្ទាយស្រីត្រូវបានកសាងឡើងនៅក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q88" value="A"> A. ឆ្នាំ ៩២៨</label>
+                    <label><input type="radio" name="q88" value="B"> B. ឆ្នាំ ៩៦៧</label>
+                    <label><input type="radio" name="q88" value="C"> C. ឆ្នាំ ៩៨០</label>
+                </div>
+                <div class="explanation" id="exp-q88"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៨៩. ប្រាសាទបន្ទាយស្រីត្រូវបានកសាងឡើងនៅក្នុងរជ្ជកាលព្រះមហាក្សត្រអង្គណាខ្លះ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q89" value="A"> A. ព្រះបាទរាជេន្ទ្រវរ្ម័នទី២ និងព្រះបាទជ័យវរ្ម័នទី៥</label>
+                    <label><input type="radio" name="q89" value="B"> B. ព្រះបាទយសោវរ្ម័នទី១ និងព្រះបាទសូរ្យវរ្ម័នទី១</label>
+                    <label><input type="radio" name="q89" value="C"> C. ព្រះបាទជ័យវរ្ម័នទី៤ និងព្រះបាទជ័យវរ្ម័នទី៧</label>
+                </div>
+                <div class="explanation" id="exp-q89"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩០. ប្រាសាទភ្នំបាខែង ត្រូវបានកសាងឡើងនៅក្នុងរជ្ជកាលព្រះមហាក្សត្រអង្គណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q90" value="A"> A. ព្រះបាទរាជេន្ទ្រវរ្ម័នទី២</label>
+                    <label><input type="radio" name="q90" value="B"> B. ព្រះបាទយសោវរ្ម័នទី១</label>
+                    <label><input type="radio" name="q90" value="C"> C. ព្រះបាទជ័យវរ្ម័នទី៥</label>
+                </div>
+                <div class="explanation" id="exp-q90"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩១. ប្រទេសបារាំងបានចូលមកគ្រប់គ្រងប្រទេសកម្ពុជាដំបូង ក្នុងរជ្ជកាលព្រះរាជាខ្មែរព្រះនាមអ្វី
+                    ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q91" value="A"> A. ព្រះបាទនរោត្តម</label>
+                    <label><input type="radio" name="q91" value="B"> B. ព្រះបាទស៊ីសុវត្ថិ</label>
+                    <label><input type="radio" name="q91" value="C"> C. ព្រះបាទមុនីវង្ស</label>
+                </div>
+                <div class="explanation" id="exp-q91"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩២. តើរបបសង្គមរាស្ត្រនិយមត្រូវបានបង្កើតឡើង និងចាប់ផ្តើមនៅក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q92" value="A"> A. ឆ្នាំ ១៩៤៧</label>
+                    <label><input type="radio" name="q92" value="B"> B. ឆ្នាំ ១៩៥៣</label>
+                    <label><input type="radio" name="q92" value="C"> C. ឆ្នាំ ១៩៥៥</label>
+                </div>
+                <div class="explanation" id="exp-q92"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩៣. តើអ្នកណាជាមេដឹកនាំធំជាងគេបំផុត (មេដឹកនាំកំពូល) នៅក្នុងរបបកម្ពុជាប្រជាធិបតេយ្យ ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q93" value="A"> A. លោក លន់ នល់</label>
+                    <label><input type="radio" name="q93" value="B"> B. លោក ប៉ុល ពត</label>
+                    <label><input type="radio" name="q93" value="C"> C. សម្តេច ហេង សំរិន</label>
+                </div>
+                <div class="explanation" id="exp-q93"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩៤. រដ្ឋប្រហារថ្ងៃទី១៨ ខែមីនា ឆ្នាំ១៩៧០ ត្រូវបានធ្វើឡើងដោយអ្នកណាខ្លះ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q94" value="A"> A. សេនាប្រមុខ លន់ នល់ និងព្រះអង្គម្ចាស់ ស៊ីសុវត្ថិ
+                        សិរិមតៈ</label>
+                    <label><input type="radio" name="q94" value="B"> B. លោក ប៉ុល ពត និងលោក ខៀវ សំផន</label>
+                    <label><input type="radio" name="q94" value="C"> C. សម្តេច នរោត្តម សីហនុ និងសម្តេច ហ៊ុន សែន</label>
+                </div>
+                <div class="explanation" id="exp-q94"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩៥. តើអ្នកណាជាមេដឹកនាំនៅក្នុងរបបសាធារណរដ្ឋប្រជាមានិតកម្ពុជា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q95" value="A"> A. លោក លន់ នល់</label>
+                    <label><input type="radio" name="q95" value="B"> B. សម្តេច ហេង សំរិន</label>
+                    <label><input type="radio" name="q95" value="C"> C. លោក ប៉ុល ពត</label>
+                </div>
+                <div class="explanation" id="exp-q95"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩៦. តើអ្នកណាជាមេដឹកនាំនៅក្នុងរបបសង្គមរាស្ត្រនិយម ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q96" value="A"> A. សម្តេច នរោត្តម សីហនុ</label>
+                    <label><input type="radio" name="q96" value="B"> B. សម្តេច ហ៊ុន សែន</label>
+                    <label><input type="radio" name="q96" value="C"> C. ព្រះបាទនរោត្តម</label>
+                </div>
+                <div class="explanation" id="exp-q96"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩៧. តើអ្នកណាជាមេដឹកនាំនៅក្នុងរបបកម្ពុជាប្រជាធិបតេយ្យ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q97" value="A"> A. លោក លន់ នល់</label>
+                    <label><input type="radio" name="q97" value="B"> B. លោក ប៉ុល ពត</label>
+                    <label><input type="radio" name="q97" value="C"> C. សម្តេច ហេង សំរិន</label>
+                </div>
+                <div class="explanation" id="exp-q97"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩៨. តើអ្នកណាជាមេដឹកនាំនៅក្នុងរបបសាធារណរដ្ឋខ្មែរ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q98" value="A"> A. លោក លន់ នល់</label>
+                    <label><input type="radio" name="q98" value="B"> B. លោក ប៉ុល ពត</label>
+                    <label><input type="radio" name="q98" value="C"> C. សម្តេច ហេង សំរិន</label>
+                </div>
+                <div class="explanation" id="exp-q98"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">៩៩. តើអ្នកណាជាប្រមុខដឹកនាំរាជរដ្ឋាភិបាលកម្ពុជា ក្នុងសម័យព្រះរាជាណាចក្រកម្ពុជាទី២ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q99" value="A"> A. សម្តេច ហ៊ុន សែន (បច្ចុប្បន្ន សម្តេចមហាបវរធិបតី ហ៊ុន
+                        ម៉ាណែត)</label>
+                    <label><input type="radio" name="q99" value="B"> B. លោក លន់ នល់</label>
+                    <label><input type="radio" name="q99" value="C"> C. សម្តេច ហេង សំរិន</label>
+                </div>
+                <div class="explanation" id="exp-q99"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០០. តើព្រះបាទពញាយ៉ាត បានមកតាំងរាជធានីនៅចតុមុខមង្គលនៅក្នុងឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q100" value="A"> A. ឆ្នាំ ១៤៣១</label>
+                    <label><input type="radio" name="q100" value="B"> B. ឆ្នាំ ១៥២៥</label>
+                    <label><input type="radio" name="q100" value="C"> C. ឆ្នាំ ១៨៦៣</label>
+                </div>
+                <div class="explanation" id="exp-q100"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០១. តើប្រទេសបារាំងបានមកធ្វើអាណាព្យាបាលលើប្រទេសកម្ពុជានៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q101" value="A"> A. ថ្ងៃទី១១ សីហា ១៨៦៣</label>
+                    <label><input type="radio" name="q101" value="B"> B. ថ្ងៃទី០៩ វិច្ឆិកា ១៩៥៣</label>
+                    <label><input type="radio" name="q101" value="C"> C. ថ្ងៃទី១៨ មីនា ១៩៧០</label>
+                </div>
+                <div class="explanation" id="exp-q101"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០២. តើព្រះមហាក្សត្រខ្មែរអង្គណា ដែលជាព្រះបិតាឯករាជ្យជាតិទាមទារឯករាជ្យជូនកម្ពុជា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q102" value="A"> A. ព្រះបាទនរោត្តម</label>
+                    <label><input type="radio" name="q102" value="B"> B. ព្រះបាទនរោត្តម សីហនុ</label>
+                    <label><input type="radio" name="q102" value="C"> C. ព្រះបាទស៊ីសុវត្ថិ មុនីវង្ស</label>
+                </div>
+                <div class="explanation" id="exp-q102"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០៣. តើប្រទេសកម្ពុជាទទួលបានឯករាជ្យទាំងស្រុងពីប្រទេសបារាំងនៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q103" value="A"> A. ថ្ងៃទី១១ សីហា ១៨៦៣</label>
+                    <label><input type="radio" name="q103" value="B"> B. ថ្ងៃទី០៩ វិច្ឆិកា ១៩៥៣</label>
+                    <label><input type="radio" name="q103" value="C"> C. ថ្ងៃទី១៨ មីនា ១៩៧០</label>
+                </div>
+                <div class="explanation" id="exp-q103"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០៤. តើរបបសង្គមរាស្ត្រនិយមត្រូវបានបង្កើតឡើងដោយព្រះមហាក្សត្រអង្គណានៅឆ្នាំ១៩៥៥ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q104" value="A"> A. ព្រះបាទនរោត្តម</label>
+                    <label><input type="radio" name="q104" value="B"> B. ព្រះបាទនរោត្តម សីហនុ</label>
+                    <label><input type="radio" name="q104" value="C"> C. ព្រះបាទស៊ីសុវត្ថិ</label>
+                </div>
+                <div class="explanation" id="exp-q104"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០៥. តើព្រះបាទនរោត្តម សីហនុ ព្រះអង្គប្រសូត្រនៅថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q105" value="A"> A. ថ្ងៃទី៣១ តុលា ១៩២២</label>
+                    <label><input type="radio" name="q105" value="B"> B. ថ្ងៃទី០៩ វិច្ឆិកា ១៩៥៣</label>
+                    <label><input type="radio" name="q105" value="C"> C. ថ្ងៃទី១៨ មិថុនា ១៩៣៤</label>
+                </div>
+                <div class="explanation" id="exp-q105"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០៦. តើព្រះបាទនរោត្តម សីហនុ ព្រះអង្គសោយទិវង្គតនៅក្នុងថ្ងៃខែឆ្នាំណា ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q106" value="A"> A. ថ្ងៃទី៣១ តុលា ១៩២២</label>
+                    <label><input type="radio" name="q106" value="B"> B. ថ្ងៃទី១៥ តុលា ២០១២</label>
+                    <label><input type="radio" name="q106" value="C"> C. ថ្ងៃទី០៩ វិច្ឆិកា ១៩៥៣</label>
+                </div>
+                <div class="explanation" id="exp-q106"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០៧. យោងតាមទិន្នន័យជំរឿនឆ្នាំ២០១៩ តើព្រះរាជាណាចក្រកម្ពុជាមានចំនួនគ្រួសារសរុបប៉ុន្មាន ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q107" value="A"> A. ចំនួន ២,៥០០,០០០ គ្រួសារ</label>
+                    <label><input type="radio" name="q107" value="B"> B. ចំនួន ៣,៣៤១,៧៧០គ្រួសារ</label>
+                    <label><input type="radio" name="q107" value="C"> C. ចំនួន ៤,១២០,៥០០ គ្រួសារ</label>
+                </div>
+                <div class="explanation" id="exp-q107"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០៨. តើការធ្វើជំរឿនទូទៅប្រជាជននៅប្រទេសកម្ពុជាកាលពីឆ្នាំ២០១៩ ធ្វើឡើងតាមវិធីសាស្ត្រអ្វី ៖
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q108" value="A"> A. តាមវិធីសាស្ត្រឃើញរាប់</label>
+                    <label><input type="radio" name="q108" value="B"> B. តាមវិធីសាស្ត្រស្ទង់មតិគំរូ</label>
+                    <label><input type="radio" name="q108" value="C"> C. តាមវិធីសាស្ត្រប៉ាន់ស្មានតាមប្រព័ន្ធអនឡាញ</label>
+                </div>
+                <div class="explanation" id="exp-q108"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១០៩. យោងតាមទិន្នន័យជំរឿនឆ្នាំ២០១៩ តើដង់ស៊ីតេប្រជាជនកម្ពុជាក្នុងមួយគីឡូម៉ែត្រការ៉េ
+                    មានចំនួនប៉ុន្មាននាក់ ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q109" value="A"> A. មានចំនួន ៧៥ នាក់/Km²</label>
+                    <label><input type="radio" name="q109" value="B"> B. មានចំនួន ៨៦ នាក់/Km²</label>
+                    <label><input type="radio" name="q109" value="C"> C. មានចំនួន ៩៨ នាក់/Km²</label>
+                </div>
+                <div class="explanation" id="exp-q109"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១១០. តើអ្វីទៅជាការធ្វើ «ជំរឿន» ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q110" value="A"> A.
+                        ជាការប្រមូលពន្ធដារប្រចាំឆ្នាំពីប្រជាពលរដ្ឋទាំងអស់នៅក្នុងប្រទេស</label>
+                    <label><input type="radio" name="q110" value="B"> B. ជាការរាប់ចំនួនប្រជាជនទាំងប្រុស ស្រី និងកុមារទាំងអស់
+                        តាមពេលវេលាកំណត់ ដើម្បីយកទិន្នន័យទៅធ្វើផែនការអភិវឌ្ឍជាតិ</label>
+                    <label><input type="radio" name="q110" value="C"> C.
+                        ជាការចុះឈ្មោះបោះឆ្នោតជាតិសម្រាប់ជ្រើសរើសតំណាងរាស្ត្រ</label>
+                </div>
+                <div class="explanation" id="exp-q110"></div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-title">១១១. តើតំបន់បឹងទន្លេសាប (ជុំវិញបឹងទន្លេសាប) មានខេត្តណាខ្លះរួមបញ្ចូល ៖</div>
+                <div class="options">
+                    <label><input type="radio" name="q111" value="A"> A. ខេត្តបន្ទាយមានជ័យ បាត់ដំបង កំពង់ឆ្នាំង កំពង់ធំ ពោធិ៍សាត់
+                        សៀមរាប ឧត្តរមានជ័យ និងប៉ៃលិន</label>
+                    <label><input type="radio" name="q111" value="B"> B. ខេត្តកំពង់ចាម ត្បូងឃ្មុំ ព្រៃវែង ស្វាយរៀង កណ្តាល
+                        និងតាកែវ</label>
+                    <label><input type="radio" name="q111" value="C"> C. ខេត្តមណ្ឌលគិរី រតនគិរី ស្ទឹងត្រែង និងក្រចេះ</label>
+                </div>
+                <div class="explanation" id="exp-q111"></div>
+            </div>
+
+
+
+
+
+
+            <button type="button" id="submitBtn" onclick="checkAnswers(true)">ផ្ទៀងផ្ទាត់លទ្ធផលទាំងអស់</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let timeLeft = 2700;
+            let timerInterval;
+            let isSubmitted = false;
+
+            const fullAnswersText = {
+                q1: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ១១ មីនា ១៨៨៣</strong><br>សម្តេចព្រះសង្ឃរាជ ជួន ណាត ជោតញ្ញាណោ ប្រសូត្រនៅថ្ងៃអង្គារ ១១ រោច ខែផល្គុន ឆ្នាំវក ឆស័ក ពុទ្ធសករាជ ២៤២៧ ត្រូវនឹងថ្ងៃទី១១ ខែមីនា គ្រិស្តសករាជ ១៨៨៣។",
+
+                q2: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ភូមិកំរៀង សង្កាត់រកាកោះ ស្រុកគងពិសី ខេត្តកំពង់ស្ពឺ</strong><br>ទ្រង់ប្រសូត្រនៅភូមិកំរៀង សង្កាត់រកាកោះ ស្រុកគងពិសី ខេត្តកំពង់ស្ពឺ។ ព្រះបិតានាមព្រហ្ម ជួន ព្រះមាតានាម យក់ ជាគ្រួសារកសិករ។ គ្រួសារនេះមានបុត្រតែពីរនាក់គឺ សម្តេចផ្ទាល់ និងឧកញ៉ាសោភណមន្ត្រី ជួន នុត ដែលជាព្រះអនុជ។",
+
+                q3: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ១៤ ព្រះវស្សា នៅវត្តពោធិព្រឹក្ស</strong><br>លុះព្រះជន្មាយុគ្រប់ ១៤ ព្រះវស្សា សម្តេចបានបួសជាសាមណេរនៅថ្ងៃ១៥កើត ខែពិសាខ ពុទ្ធសករាជ ២៤៤១ (ឧសភា ១៨៩៧) នៅវត្តពោធិព្រឹក្ស (ហៅវត្តពោល្យំ) សង្កាត់រលាំងកែន ស្រុកកណ្តាលស្ទឹង ខេត្តកណ្តាល។",
+
+                q4: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ២១ ព្រះវស្សា នៅវត្តពោធិព្រឹក្ស នាមប្បញ្ញត្តិ \"ជោតញ្ញាណោ\"</strong><br>លុះព្រះជន្មាយុគ្រប់ ២១ ព្រះវស្សា សម្តេចបានបំពេញឧបសម្បទាជាភិក្ខុនៅថ្ងៃ១៤កើត ខែជេស្ឋ ពុទ្ធសករាជ ២៤៤៨ (មិថុនា ១៩០៤) វិញនៅវត្តពោធិព្រឹក្ស ដែលជាវត្តដើម ដោយមានព្រះពុទ្ធឃោសាចារ្យ ម៉ា កេត ជាព្រះឧបជ្ឈាយ៍ និងបានទទួលនាមប្បញ្ញត្តិថា \"ជោតញ្ញាណោ\"។",
+
+                q5: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ឆ្នាំ១៩៤៤</strong><br>ព.ស.២៤៨៨ គ.ស.១៩៤៤ សម្តេចទ្រង់បានទទួលតំណែងជាចៅអធិការវត្តឧណ្ណាលោម (មុននេះមួយពីរឆ្នាំ គឺនៅឆ្នាំ១៩៤២ ទ្រង់បានទទួលឋានន្តរជាចាងហ្វាងនៃសាលាបាលីជាន់ខ្ពស់ ក្រុងភ្នំពេញ)។",
+                q6: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ការបង្កើតវចនានុក្រមខ្មែរ</strong><br>ស្នាដៃដ៏ធំបំផុតរបស់សម្តេចព្រះសង្ឃរាជ ជួន ណាត ដែលកូនខ្មែរនៅចងចាំរហូតមក គឺវចនានុក្រមខ្មែរចំនួន២ភាគ ដែលត្រូវបានបោះពុម្ពផ្សាយជាច្រើនលើក និងនៅតែប្រើប្រាស់រហូតដល់សព្វថ្ងៃ។",
+
+                q7: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី២៥ កញ្ញា ១៩៦៩</strong><br>សម្តេចព្រះសង្ឃរាជ ជួន ណាត សុគតនៅថ្ងៃទី២៥ ខែកញ្ញា ឆ្នាំ១៩៦៩ ក្នុងព្រះជន្មាយុ ៨៦ព្រះវស្សា នៅវត្តឧណ្ណាលោម រាជធានីភ្នំពេញ។",
+
+                q8: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ឆ្នាំ១៨៤៦ នៅក្រុងឧដុង្គ</strong><br>ឧកញ៉ាសន្ធរវោហារ ម៉ុក (ហៅផងថា អម្រឹតក្សត្រីម៉ុក) ជាកវីរាជវាំងក្នុងរជ្ជកាលព្រះបាទអង្គឌួង និងព្រះបាទនរោត្តម កើតនៅក្រុងឧដុង្គ ដែលជារាជធានីចាស់នាសម័យនោះ។",
+
+                q9: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ឆ្នាំ១៩០៨ ក្នុងជន្មាយុ ៦២ឆ្នាំ</strong><br>ឧកញ៉ាសន្ធរវោហារ ម៉ុក ទទួលមរណភាពនៅឆ្នាំ១៩០៨ (កើតឆ្នាំ១៨៤៦ ដូច្នេះមានជន្មាយុ ៦២ឆ្នាំ)។",
+
+                q10: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. លោកឧញ៉ាសន្ធរវោហារ ម៉ុក</strong><br>ក្រោយពីទទួលឥទ្ធិពលអក្សរសិល្ប៍បារាំង ឧកញ៉ាសន្ធរវោហារ ម៉ុក បាននិពន្ធកំណាព្យបែបនិទានប្រៀបប្រដូចជាមួយសត្វ (ស្រដៀងនឹងរឿងនិទាន La Fontaine របស់បារាំង) ដើម្បីអប់រំសីលធម៌។",
+
+                q11: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. អំពើអឆន្ទៈ</strong><br>អំពើដែលកើតឡើងដោយមិនបានគិតគូរ ឬព្រៀងទុកជាមុន ដោយគ្មានចេតនាឬឆន្ទៈជាមុនហៅថា អំពើអឆន្ទៈ ដែលខុសពី អំពើឆន្ទៈ ជាអំពើដែលធ្វើឡើងដោយចេតនា។",
+
+                q12: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ១៨៦៥</strong><br>លោកតាក្រមង៉ុយ (អ្នកភិរម្យភាសាអ៊ូ) កើតនៅឆ្នាំ១៨៦៥។",
+
+                q13: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឃុំកំបូល ស្រុកអង្គស្នួល ខេត្តកណ្តាល</strong><br>លោកតាក្រមង៉ុយ កើតនៅភូមិអណ្តូងស្វាយ ឃុំកំបូល ស្រុកភ្នំពេញ (បច្ចុប្បន្នជាស្រុកអង្គស្នួល) ខេត្តកណ្តាល។",
+
+                q14: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. អ៊ុក អ៊ូ</strong><br>លោកតាក្រមង៉ុយ មាននាមដើមថា អ៊ុក អ៊ូ ក្រោយមកទទួលងារជា \"អ្នកព្រះភិរម្យភាសាអ៊ូ\" ហើយត្រូវបានហៅឈ្មោះក្រៅផ្សេងទៀតថា ង៉ុយ ឬ ក្រមង៉ុយ ដើម្បីកុំឲ្យច្រឡំជាមួយមន្ត្រីរាជវាំងម្នាក់ទៀតឈ្មោះអ៊ូដែរ។",
+
+                q15: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ១៩៣៦</strong><br>លោកតាក្រមង៉ុយ ទទួលអនិច្ចកម្មនៅថ្ងៃសុក្រ ៦កើត ខែមិគសិរ ព.ស២៤៧៩ គ.ស១៩៣៦ ក្នុងជន្មាយុ ៧១ឆ្នាំ ដោយជំងឺទល់លាមក។",
+
+                q16: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. លោកតាក្រមង៉ុយ</strong><br>ស្នាដៃទាំង \"សេចក្ដីរំលឹកដាស់តឿន\" \"ច្បាប់កេរកាលថ្មី\" និង \"ច្បាប់ល្បើកថ្មី\" សុទ្ធតែជាកម្រងអក្សរសិល្ប៍ក្នុងចំណោម \"បណ្ដាំក្រមង៉ុយ\" ដែលនិពន្ធដោយលោកតាក្រមង៉ុយ។",
+
+                q17: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ឆ្នាំ១៨៧៤</strong><br>ឧកញ៉ាវិបុលរាជសេនា នូ កន កើតនៅឆ្នាំ១៨៧៤។",
+
+                q18: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឃុំអង្គតាសោម ស្រុកត្រាំកក់ ខេត្តតាកែវ</strong><br>ចំណាំ៖ តាមប្រភពជាច្រើន ឧកញ៉ាវិបុលរាជសេនា នូ កន ជាការពិតកើតនៅ ឃុំអង្គតាសោម ស្រុកត្រាំកក់ ខេត្តតាកែវ (មិនមែនកំបូល ដែលជាកន្លែងកំណើតរបស់ក្រមង៉ុយទេ)។ ក្នុងបញ្ជីជម្រើសដែលបានផ្តល់ឲ្យ ចម្លើយត្រឹមត្រូវជាក់ស្តែងគឺ B. ឃុំអង្គតាសោម ស្រុកត្រាំកក់ ខេត្តតាកែវ។",
+
+                q19: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. លោកឧកញ៉ាវិបុលរាជសេនា នូ កន</strong><br>តាមឯកសារខ្លះ ឧកញ៉ា នូ កន បាននិពន្ធរឿង \"ទាវឯក\" ជាកំណាព្យបទពាក្យ៨ ក្នុងឆ្នាំ១៩២៣ ហើយបានជាប់លេខ១ខាងអក្សរសាស្ត្រ (ទោះជាឯកសារខ្លះទៀតបញ្ជាក់ថាលោកយកមកសរសេរបោះពុម្ពជាថ្មីនៅឆ្នាំ១៩៤២)។",
+
+                q20: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី០៨ កុម្ភៈ ១៩៤៧ វេលាម៉ោង ៨យប់ ជន្មាយុ ៧៣ឆ្នាំ</strong><br>ឧកញ៉ាវិបុលរាជសេនា នូ កន (កើតឆ្នាំ១៨៧៤) ទទួលមរណភាពដោយជរាពាធ នៅថ្ងៃទី៨ ខែកុម្ភៈ ឆ្នាំ១៩៤៧ ក្នុងជន្មាយុ ៧៣ឆ្នាំ។",
+
+                q21: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. បណ្ឌិតម៉ឺន មៃ</strong><br>ថ្វីត្បិតច្បាប់ស្រី ត្រូវបានគេចាត់ទុកជាទូទៅថានិពន្ធដោយព្រះបាទអង្គឌួងក្នុងឆ្នាំ១៨៣៧ ក៏ដោយ ក៏មានការសិក្សា (ដូចជារបស់ Judy Ledgerwood) ចាត់ទុកថា ម៉ឺនម៉ៃ ជាអ្នកសរសេរសាត្រាស្លឹករឹតដែលល្បីជាងគេនៃច្បាប់ស្រី។",
+
+                q22: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី១៨ មិថុនា ១៩៣៤ នៅរាជធានីភ្នំពេញ</strong><br>លោកសាស្ត្រាចារ្យ នួន កន កើតនៅថ្ងៃទី១៨ ខែមិថុនា ឆ្នាំ១៩៣៤ នៅរាជធានីភ្នំពេញ។ លោកជាសាស្ត្រាចារ្យនាដសាស្ត្រនៃមហាវិទ្យាល័យវិចិត្រសិល្បៈភ្នំពេញ។",
+
+                q23: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. លោកសាស្ត្រាចារ្យ នួន កន</strong><br>បទចម្រៀង \"ពង្សាវតារខ្មែរ\" ជាស្នាដៃរបស់សាស្ត្រាចារ្យ នួន កន ដែលមនុស្សជាច្រើនច្រឡំគិតថាជាស្នាដៃរបស់សម្តេចព្រះសង្ឃរាជ ជួន ណាត។",
+
+                q24: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី១២ កញ្ញា ១៩៥៨ តាមលំនាំបទស្រីខ្មែរត្បាញ</strong><br>បទ \"ពង្សាវតារខ្មែរ\" និពន្ធឡើងនៅថ្ងៃទី១២ ខែកញ្ញា ឆ្នាំ១៩៥៨ ដកស្រង់តាមលំនាំបទបុរាណខ្មែរ \"ស្រីខ្មែរត្បាញ\" ហើយបានយកទៅប្រកួតក្នុងទិវាមហោស្រពជាតិឆ្នាំ១៩៥៨ និងទទួលពានមាស។",
+
+                q25: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី៣១ មីនា ២០០២ នៅឡុងប៊ិច សហរដ្ឋអាមេរិក ក្នុងជន្មាយុ ៦៨ឆ្នាំ</strong><br>លោកសាស្ត្រាចារ្យ នួន កន (កើតឆ្នាំ១៩៣៤) ទទួលមរណភាពនៅឆ្នាំ២០០២ ក្នុងជន្មាយុ៦៨ឆ្នាំ។",
+
+                q26: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី២២ កក្កដា ឆ្នាំ១៨៥៩</strong><br>ឧកញ៉ាសុត្តន្តប្រីជាឥន្ទ (មាននាមដើមថា ឥន្ទ) កើតនៅថ្ងៃចន្ទ ខែអាសាធ ឆ្នាំវក ពុទ្ធសករាជ២៤០៣ ត្រូវនឹងថ្ងៃទី២២ ខែកក្កដា ឆ្នាំ១៨៥៩។",
+
+                q27: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ភូមិរកាកោង ស្រុកមុខកំពូល ខេត្តកណ្តាល</strong><br>ឧកញ៉ាសុត្តន្តប្រីជាឥន្ទ កំណើតកើតនៅស្រុកទន្លេធំ គឺភូមិរកាកោង ស្រុកមុខកំពូល ខេត្តកណ្តាល។ ព្រះមាតាឈ្មោះយាយមុំ ព្រះបិតាឈ្មោះបញ្ចងកែ។",
+
+                q28: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី០៨ វិច្ឆិកា ឆ្នាំ១៩២៤ វេលាម៉ោង ៨ព្រឹក</strong><br>ឧកញ៉ាសុត្តន្តប្រីជាឥន្ទ ទទួលអនិច្ចកម្មដោយរោគាពាធ នៅវេលាម៉ោង៨ព្រឹក ថ្ងៃទី៨ ខែវិច្ឆិកា ឆ្នាំ១៩២៤ ក្នុងព្រះជន្មាយុ ៦៥ឆ្នាំ។",
+
+                q29: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ១៨៥២</strong><br>ព្រះបទុមត្ថេរ សោម (ឬ ភិក្ខុសោម) ប្រសូត្រនៅឆ្នាំ១៨៥២។",
+
+                q30: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ឃុំកំព្រៅ ស្រុកស៊ីធរកណ្តាល ខេត្តព្រៃវែង</strong><br>ព្រះបទុមត្ថេរ សោម ប្រសូត្រនៅឃុំកំព្រៅ ស្រុកស៊ីធរកណ្តាល ខេត្តព្រៃវែង។ ព្រះបិតានាមងួន ព្រះមាតានាមយិន ជាកសិករ។",
+
+                q31: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. រឿងទុំទាវ និពន្ធឆ្នាំ១៩១៥ ជាបទពាក្យ៧ ចំនួន១០៥០ល្បះ</strong><br>ស្នាព្រះហស្ថដ៏ល្បីល្បាញរបស់ព្រះបទុមត្ថេរ សោម គឺរឿងទុំទាវ តាក់តែងឡើងជាកំណាព្យបទពាក្យ៧ នៅព.ស.២៤៥៨ (គ.ស.១៩១៥) មានចំនួន១០៥០វគ្គ។",
+
+                q32: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ១៩៣២ ក្នុងព្រះជន្មាយុ ៨០ព្រះវស្សា</strong><br>ព្រះបទុមត្ថេរ សោម (កើតឆ្នាំ១៨៥២) សុគតនៅឆ្នាំ១៩៣២ ក្នុងព្រះជន្មាយុ ៨០ព្រះវស្សា។",
+
+                q33: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី២២ មិថុនា ១៩០៣</strong><br>លោក ញ៉ុក ថែម កើតនៅថ្ងៃទី២២ ខែមិថុនា ឆ្នាំ១៩០៣ (ខ្លះថា ២១ មិថុនា)។",
+
+                q34: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឃុំស្វាយប៉ោ ស្រុកសង្កែ ខេត្តបាត់ដំបង (បច្ចុប្បន្នជាសង្កាត់ស្វាយប៉ោ ក្រុងបាត់ដំបង)</strong><br>លោក ញ៉ុក ថែម កើតនៅឃុំស្វាយប៉ោ ស្រុកសង្កែ ខេត្តបាត់ដំបង។",
+
+                q35: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. រឿងកុលាបប៉ៃលិន</strong><br>ក្នុងចំណោមស្នាដៃជាច្រើនរបស់លោក ញ៉ុក ថែម ស្នាដៃដែលគេស្គាល់ខ្លាំងជាងគេគឺរឿងកុលាបប៉ៃលិន។",
+
+                q36: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ១៩៧៤</strong><br>លោក ញ៉ុក ថែម (កើតឆ្នាំ១៩០៣) ទទួលអនិច្ចកម្មនៅឆ្នាំ១៩៧៤។",
+
+                q37: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី២៦ មិថុនា ១៩១៦</strong><br>លោក នូ ហាច កើតនៅថ្ងៃទី២៦ ខែមិថុនា ឆ្នាំ១៩១៦។",
+
+                q38: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឃុំកំពង់ព្រះ ស្រុកសង្កែ ខេត្តបាត់ដំបង</strong><br>លោក នូ ហាច កើតនៅឃុំកំពង់ព្រះ ស្រុកសង្កែ ខេត្តបាត់ដំបង។ ព្រះបិតានាមឃួន នៅ ព្រះមាតានាមឱរ មួច ជាកសិករ។",
+
+                q39: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. រឿងផ្កាស្រពោន (និពន្ធឆ្នាំ១៩៤៧ បោះពុម្ពឆ្នាំ១៩៤៩)</strong><br>ស្នាដៃដ៏ល្បីល្បាញបំផុតរបស់លោក នូ ហាច គឺរឿងផ្កាស្រពោន ដែលបោះពុម្ពផ្សាយក្នុងឆ្នាំ១៩៤៩ និងបានបញ្ចូលក្នុងកម្មវិធីសិក្សារដ្ឋផងដែរ។",
+
+                q40: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ត្រូវបានពួកខ្មែរក្រហមសម្លាប់នៅខែមេសា ឆ្នាំ១៩៧៥</strong><br>លោក នូ ហាច ត្រូវបានពួកខ្មែរក្រហមសម្លាប់នៅប្រហែលខែមេសា ឆ្នាំ១៩៧៥ ក្រោយពីវិលត្រឡប់មកភ្នំពេញវិញនៅឆ្នាំ១៩៧៤។",
+                q41: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី០៩ កក្កដា ១៩៣០</strong><br>លោក សួន សុរិន្ទ កើតនៅថ្ងៃទី៩ ខែកក្កដា ឆ្នាំ១៩៣០។",
+
+                q42: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ស្រុកសង្កែ ខេត្តបាត់ដំបង</strong><br>លោក សួន សុរិន្ទ កើតនៅសង្កាត់ជ្រៃ ស្រុកសង្កែ ខេត្តបាត់ដំបង។",
+
+                q43: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. រឿងព្រះអាទិត្យថ្មីរះលើផែនដីចាស់ (និពន្ធឆ្នាំ១៩៦០-១៩៦១)</strong><br>ស្នាដៃរបស់លោក សួន សុរិន្ទ គឺរឿងព្រះអាទិត្យថ្មីរះលើផែនដីចាស់ ដែលបានជាប់លេខ១ រង្វាន់ឥន្ទ្រទេវីលើកទី១។",
+
+                q44: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. រឿងគូលីកំណែន និពន្ធនៅឆ្នាំ១៩៥៦</strong><br>លោក អ៊ឹម ថុក ជាអតីតចាងហ្វាងកាសែតវត្តភ្នំ បាននិពន្ធរឿងគូលីកំណែននៅខែសីហា ឆ្នាំ១៩៥៦ ក្រៅពីនេះក៏មានរឿងស៊ឹមអ្នកបរឡាន និងរឿងតារាចន្រ្ទ (ទាំងអស់ឆ្នាំ១៩៥៦)។",
+
+                q45: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ឆ្នាំ១៩៣៤ នៅស្រុកមោងឫស្សី ខេត្តបាត់ដំបង</strong><br>លោក ឌឿក អំ (ត្រូវគ្នានឹងឈ្មោះក្នុងសំណួរ) កើតនៅឆ្នាំ១៩៣៤ នៅស្រុកមោងឫស្សី ខេត្តបាត់ដំបង ជាអ្នកជំនួយការសរសេរទស្សនាវដ្តីកងទ័ពនៅឆ្នាំ១៩៦៤-១៩៦៥។",
+
+                q46: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី០៥ មករា ១៩៣៦ នៅសង្កាត់ឫស្សីកែវ ស្រុកឆ្លូង ខេត្តក្រចេះ</strong><br>លោក ឌឹក គាម កើតនៅថ្ងៃទី៥ ខែមករា ឆ្នាំ១៩៣៦ នៅសង្កាត់ឫស្សីកែវ ស្រុកឆ្លូង ខេត្តក្រចេះ។",
+
+                q47: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. រឿងភូមិតិរច្ឆាន (និពន្ធឆ្នាំ១៩៦៤-១៩៦៥)</strong><br>លោក ឌឹក គាម និងលោក ឌឿក អំ បានសហការគ្នានិពន្ធរឿងភូមិតិរច្ឆាននៅឆ្នាំ១៩៦៤-១៩៦៥។",
+
+                q48: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. រឿងចៅស្រទបចេក និពន្ធក្នុងឆ្នាំ១៨៨៩</strong><br>ស្នាដៃដ៏ល្បីល្បាញរបស់លោក យស ងិន គឺរឿងចៅស្រទបចេក (ហៅផងថា ទេវវង្សកុមារ) និពន្ធនៅថ្ងៃអង្គារ ១១កើត ខែផល្គុន ព.ស២៤៣២ ត្រូវនឹងគ.ស១៨៨៩។",
+
+                q49: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី១០ កុម្ភៈ ១៩៥២ នៅស្រុកបាទី ខេត្តតាកែវ</strong><br>លោក ទី ជីហួត កើតនៅថ្ងៃទី១០ ខែកុម្ភៈ ឆ្នាំ១៩៥២ នៅភូមិត្រពាំងស្លា ឃុំត្រពាំងសាប ស្រុកបាទី ខេត្តតាកែវ។",
+
+                q50: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. រឿងតេជោយ៉ត និពន្ធក្នុងឆ្នាំ១៩៨៣</strong><br>ស្នាដៃដ៏ល្បីល្បាញរបស់លោក ទី ជីហួត គឺរឿងតេជោយ៉ត ជាល្ខោនបាសាក់ដែលនិពន្ធក្នុងឆ្នាំ១៩៨៣។",
+
+                q51: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ៤៨ ម៉ោង</strong><br>តាមច្បាប់នីតិវិធីព្រហ្មទណ្ឌកម្ពុជា នគរបាលយុត្តិធម៌អាចឃុំខ្លួនជនជាប់ចោទបានមិនលើសពី ៤៨ម៉ោង ហើយអាចបន្តរយៈពេលបានតែម្តងទៀតរហូតដល់ ២៤ម៉ោង (សរុប ៧២ម៉ោង) ចំពោះករណីមានលក្ខណៈធ្ងន់ធ្ងរ។",
+
+                q52: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. កូនក្តីរបស់ខ្លួន</strong><br>មេធាវីមានតួនាទីជាអ្នកការពារកូនក្តី(អតិថិជន)របស់ខ្លួននៅក្នុងដំណើរការក្តី។",
+
+                q53: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ៥ គីឡូម៉ែត្រ</strong><br>ប្រាសាទអង្គរវត្តមានទីតាំងស្ថិតនៅចម្ងាយប្រមាណ ៥ គីឡូម៉ែត្រភាគខាងជើងនៃទីក្រុងសៀមរាប (ជិតបំផុតទៅនឹងជម្រើស ៥គីឡូម៉ែត្រ)។",
+
+                q54: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទសូរ្យវរ្ម័នទី២</strong><br>ប្រាសាទអង្គរវត្តត្រូវបានកសាងឡើងដោយព្រះបាទសូរ្យវរ្ម័នទី២ ជាប្រាសាទតំណាង និងជាព្រះសុសានចុងក្រោយរបស់ព្រះអង្គ។",
+
+                q55: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ដើមសតវត្សទី១២</strong><br>ប្រាសាទអង្គរវត្តត្រូវបានកសាងឡើងនៅដើមសតវត្សទី១២ (ប្រហែលឆ្នាំ១១១៣-១១៥០)។",
+
+                q56: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះវិស្ណុ (ព្រះនារាយណ៍)</strong><br>ខុសពីព្រះមហាក្សត្រមុនៗដែលគោរពសិវនិយម ព្រះបាទសូរ្យវរ្ម័នទី២ បានកសាងប្រាសាទអង្គរវត្តដើម្បីឧទ្ទិសចំពោះព្រះវិស្ណុ (ព្រះនារាយណ៍)។",
+
+                q57: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ប្រាសាទបរមវិស្ណុលោក</strong><br>ប្រាសាទអង្គរវត្តមានឈ្មោះដើមថា \"បរមវិស្ណុលោក\" ដោយសារឧទ្ទិសចំពោះព្រះវិស្ណុ។",
+
+                q58: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី១៤ ធ្នូ ១៩៩២</strong><br>តំបន់អង្គរត្រូវបានចុះក្នុងបញ្ជីបេតិកភណ្ឌពិភពលោករបស់អង្គការយូណេស្កូនៅថ្ងៃទី១៤ ខែធ្នូ ឆ្នាំ១៩៩២។",
+
+                q59: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. កំពូល៥</strong><br>ប្រាសាទអង្គរវត្តមានកំពូលចំនួន ៥ តម្កល់ជាកំពូលកណ្តាល និងកំពូលព័ទ្ធជុំវិញទាំង៤។",
+
+                q60: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. កំពូលភ្នំព្រះសុមេរុ</strong><br>កំពូលទាំង៥នៃប្រាសាទអង្គរវត្តតំណាងឱ្យកំពូលទាំង៥របស់ភ្នំព្រះសុមេរុ ដែលជាកន្លែងសម្តែងអំណាចរបស់ព្រះមហាក្សត្រតាមជំនឿព្រហ្មញ្ញសាសនា-ហិណ្ឌូ។",
+
+                q61: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះពុទ្ធសាសនាមហាយាន</strong><br>ប្រាសាទបាយ័នត្រូវបានកសាងឡើងឧទ្ទិសចំពោះព្រះពុទ្ធសាសនាមហាយាន ក្នុងសម័យព្រះបាទជ័យវរ្ម័នទី៧ ដែលទ្រង់ជាកសិត្តរាជ (Bodhisattva-King)។",
+
+                q62: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ដើមសតវត្សទី១៣</strong><br>ប្រាសាទបាយ័នត្រូវបានកសាងឡើងនៅចុងសតវត្សទី១២ ដល់ដើមសតវត្សទី១៣ ក្នុងរជ្ជកាលព្រះបាទជ័យវរ្ម័នទី៧ (១១៨១-ប្រមាណ១២១៨)។",
+
+                q63: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. កំពូល៥៤</strong><br>ប្រាសាទបាយ័នមានកំពូលចំនួន ៥៤ ដែលនីមួយៗមានចម្លាក់ជារូបព្រហ្មមុខ៤។",
+
+                q64: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ខេត្តក្រុងខ្មែរនាពេលនោះ</strong><br>កំពូលទាំង៥៤ របស់ប្រាសាទបាយ័នត្រូវបានគេពន្យល់ថាតំណាងឱ្យចំនួនខេត្តក្រុងទាំងឡាយក្នុងចក្រភពខ្មែរនាសម័យព្រះបាទជ័យវរ្ម័នទី៧។",
+
+                q65: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រហ្មវិហារធម៌ទាំងបួន (មេត្តា ករុណា មុទិតា ឧបេក្ខា)</strong><br>រូបព្រហ្មមុខ៤ (ស្នាមញញឹមបាយ័ន) នៅលើកំពូលនីមួយៗត្រូវបានពន្យល់ថាតំណាងឱ្យព្រហ្មវិហារធម៌ទាំងបួន គឺ មេត្តា ករុណា មុទិតា និងឧបេក្ខា។",
+
+                q66: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះបាទជ័យវរ្ម័នទី៧</strong><br>ប្រាសាទបាយ័នត្រូវបានកសាងឡើងដោយព្រះបាទជ័យវរ្ម័នទី៧ ជាប្រាសាទកណ្តាលនៃរាជធានីអង្គរធំ។",
+
+                q67: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទយសោវរ្ម័នទី១ ព្រះបាទសូរ្យវរ្ម័នទី១ និងព្រះបាទសូរ្យវរ្ម័នទី២</strong><br>ប្រាសាទព្រះវិហារត្រូវបានកសាងបន្តបន្ទាប់គ្នាដោយព្រះមហាក្សត្រច្រើនអង្គរួមមានព្រះបាទយសោវរ្ម័នទី១ ព្រះបាទសូរ្យវរ្ម័នទី១ និងព្រះបាទសូរ្យវរ្ម័នទី២។",
+
+                q68: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សតវត្សទី៩ ដល់ទី១២</strong><br>ប្រាសាទព្រះវិហារត្រូវបានកសាងបន្តបន្ទាប់គ្នារយៈពេលវែងតាំងពីសតវត្សទី៩ រហូតដល់សតវត្សទី១២។",
+
+                q69: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះស្រីសិខារេស្វរៈ ឬអាទិទេពនៃកំពូលភ្នំ</strong><br>ប្រាសាទព្រះវិហារកសាងឡើងឧទ្ទិសថ្វាយចំពោះព្រះស្រីសិខារេស្វរៈ ដែលជាអាទិទេពគង់នៅលើកំពូលភ្នំតាមជំនឿសិវនិយម។",
+
+                q70: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី០៧ កក្កដា ២០០៨</strong><br>ប្រាសាទព្រះវិហារត្រូវបានចុះក្នុងបញ្ជីបេតិកភណ្ឌពិភពលោកនៅថ្ងៃទី៧ ខែកក្កដា ឆ្នាំ២០០៨។",
+
+                q71: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ថ្ងៃទី០៨ ខែកក្កដា ឆ្នាំ២០១៧</strong><br>ប្រាសាទសំបូរព្រៃគុកត្រូវបានចុះក្នុងបញ្ជីបេតិកភណ្ឌពិភពលោកនៅថ្ងៃទី០៨ ខែកក្កដា ឆ្នាំ២០១៧",
+
+                q72: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. សតវត្សទី៧</strong><br>ប្រាសាទសំបូរព្រៃគុកត្រូវបានកសាងឡើងនៅសតវត្សទី៧ ជារាជធានីចាស់ឈ្មោះឥសានបុរៈ។",
+
+                q73: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទឥសានវរ្ម័នទី១</strong><br>ប្រាសាទសំបូរព្រៃគុកកសាងឡើងដោយព្រះបាទឥសានវរ្ម័នទី១ ជារាជធានីរបស់ព្រះអង្គ។",
+
+                q74: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះសិវៈ ឬព្រះឥសូរ</strong><br>ប្រាសាទសំបូរព្រៃគុកកសាងឡើងឧទ្ទិសថ្វាយចំពោះព្រះសិវៈ (ព្រះឥសូរ) ស្របតាមប្រពៃណីសិវនិយម។",
+
+                q75: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឥសានបុរៈ</strong><br>ប្រាសាទសំបូរព្រៃគុកមានឈ្មោះដើមថា \"ឥសានបុរៈ\" ជារាជធានីរបស់ព្រះបាទឥសានវរ្ម័នទី១។",
+
+                q76: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ខេត្តកំពង់ធំ</strong><br>ប្រាសាទសំបូរព្រៃគុកមានទីតាំងស្ថិតនៅក្នុងខេត្តកំពង់ធំ។",
+
+                q77: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ភូមិស្រយ៉ង់ខាងជើង ឃុំស្រយ៉ង់ ស្រុកគូលែន ខេត្តព្រះវិហារ</strong><br>ប្រាសាទកោះកេរមានទីតាំងស្ថិតនៅភូមិស្រយ៉ង់ខាងជើង ឃុំស្រយ៉ង់ ស្រុកគូលែន ខេត្តព្រះវិហារ។",
+
+                q78: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ប្រមាណ ១២០ គីឡូម៉ែត្រពីទីរួមខេត្តសៀមរាប និងប្រមាណ ៦០ គីឡូម៉ែត្រពីទីរួមខេត្តព្រះវិហារ</strong><br>ប្រាសាទកោះកេរស្ថិតនៅចម្ងាយប្រមាណ១២០គីឡូម៉ែត្រពីទីរួមខេត្តសៀមរាប និងប្រមាណ៦០គីឡូម៉ែត្រពីទីរួមខេត្តព្រះវិហារ។",
+
+                q79: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទជ័យវរ្ម័នទី៤</strong><br>ប្រាសាទកោះកេរត្រូវបានកសាងឡើងជារាជធានីរបស់ព្រះបាទជ័យវរ្ម័នទី៤។",
+
+                q80: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ក្នុងសតវត្សទី១០ (ឆ្នាំ៩២៨-ឆ្នាំ៩៤២)</strong><br>ប្រាសាទកោះកេរត្រូវបានកសាងឡើងក្នុងសតវត្សទី១០ ក្នុងកំឡុងឆ្នាំ៩២៨-៩៤២ ជារជ្ជកាលព្រះបាទជ័យវរ្ម័នទី៤។",
+
+                q81: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះឥសូរ (ព្រះសិវៈ)</strong><br>ប្រាសាទកោះកេរ (ឬប្រាសាទធំ) ត្រូវបានកសាងឡើងដើម្បីឧទ្ទិសថ្វាយចំពោះព្រះឥសូរ (ព្រះសិវៈ) ក្រោមទម្រង់ជាសិវលិង្គដ៏ធំមួយព្រះនាម «ត្រីភុវនេស្វរៈ»។",
+                q82: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ពីរ៉ាមីត</strong><br>ប្រាសាទធំនៅក្នុងរមណីយដ្ឋានកោះកេរ មានទម្រង់ស្ថាបត្យកម្មប្លែក និងលេចធ្លោខ្លាំងដោយមានរាងជាពីរ៉ាមីត ឬថ្នាក់ៗហៅថាប្រាសាទភ្នំ។",
+                q83: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ៧ ជាន់</strong><br>ប្រាសាទភ្នំ ឬប្រាសាទធំនៅកោះកេរ មានកម្ពស់ដាច់ពីគេដោយចែកចេញជា ៧ ជាន់ ឬ ៧ ថ្នាក់។",
+                q84: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ៣៥ ម៉ែត្រ</strong><br>ប្រាសាទធំ ឬប្រាសាទភ្នំកោះកេរ មានកម្ពស់ប្រមាណ ៣៥ ម៉ែត្រ គិតចាប់ពីដីរហូតដល់កំពូលជាន់លើបង្អស់។",
+                q85: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ស្រុកបន្ទាយស្រី ខេត្តសៀមរាប</strong><br>ប្រាសាទបន្ទាយស្រី មានទីតាំងស្ថិតនៅក្នុងស្រុកបន្ទាយស្រី ខេត្តសៀមរាប ដែលមានចម្ងាយប្រហែល ៣៩ គីឡូម៉ែត្រពីក្រុងសៀមរាប។",
+                q86: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. រចនាបថបន្ទាយស្រី</strong><br>ប្រាសាទបន្ទាយស្រី ត្រូវបានកំណត់ជាឈ្មោះរចនាបថផ្ទាល់ខ្លួនមួយហៅថា «រចនាបថបន្ទាយស្រី» ដោយសារតែក្បូរក្បាច់រចនាដ៏ល្អវិចិត្រ និងល្អិតឆ្មារគ្មានពីរ។",
+                q87: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះឥសូរ និងព្រះវិស្ណុ (ព្រះនរាយណ៍)</strong><br>ប្រាសាទបន្ទាយស្រី ត្រូវបានបែងចែកជាប៉មសម្រាប់ឧទ្ទិសថ្វាយដល់ព្រះសិវៈ (ព្រះឥសូរ) នៅប៉មកណ្តាល និងប៉មខាងត្បូង ហើយឧទ្ទិសថ្វាយព្រះវិស្ណុ (ព្រះនារាយណ៍) នៅប៉មខាងជើង។",
+                q88: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ឆ្នាំ ៩៦៧</strong><br>ប្រាសាទបន្ទាយស្រី ត្រូវបានកសាងឡើង និងធ្វើពិធីប្រទានឆ្លាក់នៅឆ្នាំ ៩៦៧ នៃគ្រិស្តសករាជ។",
+                q89: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះបាទរាជេន្ទ្រវរ្ម័នទី២ និងព្រះបាទជ័យវរ្ម័នទី៥</strong><br>ប្រាសាទនេះចាប់ផ្តើមកសាងឡើងចុងរជ្ជកាលព្រះបាទរាជេន្ទ្រវរ្ម័នទី២ និងរួចរាល់ស្ថាពរនៅដើមរជ្ជកាលព្រះបាទជ័យវរ្ម័នទី៥ ដោយព្រហ្មណ៍ម្នាក់ឈ្មោះ យជ្ញវរាហៈ។",
+                q90: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទយសោវរ្ម័នទី១</strong><br>ប្រាសាទភ្នំបាខែង ត្រូវបានកសាងឡើងដោយព្រះបាទយសោវរ្ម័នទី១ នៅចុងសតវត្សទី៩ និងដើមសតវត្សទី១០ ដើម្បីធ្វើជាប្រាសាទតំណាងឱ្យរាជធានីយសោធរបុរៈទី១។",
+                q91: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ព្រះបាទនរោត្តម</strong><br>ប្រទេសបារាំងបានចូលមកបង្កើតរបបអាណាព្យាបាលលើកម្ពុជាដំបូងនៅឆ្នាំ ១៨៦៣ ក្នុងរជ្ជកាលព្រះបាទនរោត្តម។",
+                q92: "<strong>ចម្លើយត្រឹមត្រូវ៖ C. ឆ្នាំ ១៩៥៥</strong><br>ចលនាសង្គមរាស្ត្រនិយម ត្រូវបានបង្កើតឡើងដោយសម្តេចព្រះនរោត្តម សីហនុ នៅខែមេសា ឆ្នាំ ១៩៥៥ ក្រោយពេលដែលព្រះអង្គបានដាក់រាជ្យថ្វាយព្រះបិតា។",
+                q93: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. លោក ប៉ុល ពត</strong><br>លោក ប៉ុល ពត (សាឡុត ស) គឺជាលេខាបក្ស និងជាមេដឹកនាំកំពូលដាច់ខាតនៅក្នុងរបបកម្ពុជាប្រជាធិបតេយ្យ (ខ្មែរក្រហម) ពីឆ្នាំ ១៩៧៥ ដល់ ឆ្នាំ ១៩៧៩។",
+                q94: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. សេនាប្រមុខ លន់ នល់ និងព្រះអង្គម្ចាស់ ស៊ីសុវត្ថិ សិរិមតៈ</strong><br>រដ្ឋប្រហារទម្លាក់សម្តេចព្រះនរោត្តម សីហនុ ថ្ងៃទី១៨ មីនា ១៩៧០ ដឹកនាំដោយសេនាប្រមុខ លន់ នល់ និងព្រះអង្គម្ចាស់ ស៊ីសុវត្ថិ សិរិមតៈ ដើម្បីបង្កើតរបបសាធារណរដ្ឋខ្មែរ។",
+                q95: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. សម្តេច ហេង សំរិន</strong><br>សម្តេច ហេង សំរិន គឺជាប្រមុខរដ្ឋ និងជាប្រធានក្រុមប្រឹក្សារដ្ឋនៃរបបសាធារណរដ្ឋប្រជាមានិតកម្ពុជា ក្រោយការដួលរលំនៃរបបខ្មែរក្រហមនៅឆ្នាំ ១៩៧៩។",
+                q96: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. សម្តេច នរោត្តម សីហនុ</strong><br>សម្តេចព្រះនរោត្តម សីហនុ គឺជាព្រះបិតាបង្កើត និងជាប្រមុខដឹកនាំដ៏មានឥទ្ធិពលបំផុតនៅក្នុងសម័យសង្គមរាស្ត្រនិយម (១៩៥៥-១៩៧០)។",
+                q97: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. លោក ប៉ុល ពត</strong><br>លោក ប៉ុល ពត ជានាយករដ្ឋមន្ត្រី និងជាមេដឹកនាំកំពូលនៃរបបអាវខ្មៅកម្ពុជាប្រជាធិបតេយ្យ។",
+                q98: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. លោក លន់ នល់</strong><br>សេនាប្រមុខ លន់ នល់ គឺជាប្រធានាធិបតី និងជាមេដឹកនាំកំពូលនៃរបបសាធារណរដ្ឋខ្មែរ (១៩៧០-១៩៧៥)។",
+                q99: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. សម្តេច ហ៊ុន សែន (បច្ចុប្បន្ន សម្តេចមហាបវរធិបតី ហ៊ុន ម៉ាណែត)</strong><br>ក្នុងសម័យព្រះរាជាណាចក្រកម្ពុជាទី២ (ចាប់ពីឆ្នាំ ១៩៩៣) សម្តេចតេជោ ហ៊ុន សែន បានដឹកនាំជានាយករដ្ឋមន្ត្រីរយៈពេលយូរ ហើយបច្ចុប្បន្នបន្តវេនដោយសម្តេចមហាបវរធិបតី ហ៊ុន ម៉ាណែត។",
+                q100: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ឆ្នាំ ១៤៣១</strong><br>ព្រះបាទពញាយ៉ាត បានសម្រេចព្រះទ័យបោះបង់ចោលរាជធានីអង្គរ ហើយបានមកតាំងរាជធានីថ្មីនៅចតុមុខ (ភ្នំពេញ) ក្នុងឆ្នាំ ១៤៣១ នៃគ្រិស្តសករាជ។",
+                q101: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី១១ សីហា ១៨៦៣</strong><br>សន្ធិសញ្ញាអាណាព្យាបាលរវាងកម្ពុជា និងបារាំង ត្រូវបានចុះហត្ថលេខានៅថ្ងៃទី១១ ខែសីហា ឆ្នាំ១៨៦៣ ដោយព្រះបាទនរោត្តម។",
+                q102: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទនរោត្តម សីហនុ</strong><br>ព្រះបាទនរោត្តម សីហនុ ត្រូវបានប្រជាជាតិខ្មែរថ្វាយព្រះរាជបរមនាមថា «ព្រះមហាវីរក្សត្រ ព្រះបិតាឯករាជ្យជាតិ» តាមរយៈព្រះរាជបូជនីយកិច្ចទាមទារឯករាជ្យពីបារាំង។",
+                q103: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី០៩ វិច្ឆិកា ១៩៥៣</strong><br>ប្រទេសកម្ពុជាទទួលបានឯករាជ្យបរិបូណ៌ និងទាំងស្រុងពីសាធារណរដ្ឋបារាំងនៅថ្ងៃទី៩ ខែវិច្ឆិកា ឆ្នាំ១៩៥៣។",
+                q104: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ព្រះបាទនរោត្តម សីហនុ</strong><br>របបសង្គមរាស្ត្រនិយម បង្កើតឡើងដោយសម្តេចព្រះនរោត្តម សីហនុ ក្រោយពេលព្រះអង្គដាក់រាជ្យដើម្បីចូលរួមប្រឡូកក្នុងឆាកនយោបាយផ្ទាល់។",
+                q105: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ថ្ងៃទី៣១ តុលា ១៩២២</strong><br>ព្រះករុណាព្រះបាទសម្តេចព្រះ នរោត្តម សីហនុ ព្រះអង្គប្រសូត្រនៅថ្ងៃទី៣១ ខែតុលា ឆ្នាំ១៩២២ នៅរាជធានីភ្នំពេញ។",
+                q106: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ថ្ងៃទី១៥ តុលា ២០១២</strong><br>ព្រះបរមរតនកោដ្ឋ ព្រះបាទនរោត្តម សីហនុ បានសោយទិវង្គតនៅថ្ងៃទី១៥ ខែតុលា ឆ្នាំ២០១២ នាទីក្រុងប៉េកាំង ប្រទេសចិន ក្នុងព្រះជន្មាយុ ៩០ ព្រះវស្សា។",
+                q107: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ចំនួន ៣,៣៤១,៧៧០ គ្រួសារ</strong><br>យោងតាមរបាយការណ៍លទ្ធផលចុងក្រោយនៃជំរឿនទូទៅប្រជាជនឆ្នាំ២០១៩ កម្ពុជាមានគ្រួសារសរុបចំនួន ៣,៣4១,៧៧០ គ្រួសារ។",
+                q108: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. តាមវិធីសាស្ត្រឃើញរាប់</strong><br>ការធ្វើជំរឿនឆ្នាំ២០១៩ គឺធ្វើឡើងតាមវិធីសាស្ត្រសម្ភាសផ្ទាល់ និងឃើញរាប់ជាក់ស្តែង (De Facto Census) នៅតាមខ្នងផ្ទះទូទាំងប្រទេស។",
+                q109: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. មានចំនួន ៨៦ នាក់/Km²</strong><br>ផ្អែកលើចំនួនប្រជាជនសរុបប្រមាណ ១៥.៦ លាននាក់ និងផ្ទៃដីប្រទេស ដង់ស៊ីតេប្រជាជនកម្ពុជានៅឆ្នាំ២០១៩ គឺ ៨៦ នាក់ក្នុងមួយគីឡូម៉ែត្រការ៉េ។",
+                q110: "<strong>ចម្លើយត្រឹមត្រូវ៖ B. ជាការរាប់ចំនួនប្រជាជនទាំងប្រុស ស្រី និងកុមារទាំងអស់ តាមពេលវេលាកំណត់ ដើម្បីយកទិន្នន័យទៅធ្វើផែនការអភិវឌ្ឍជាតិ</strong><br>ជំរឿនប្រជាជន គឺជាកិច្ចការថ្នាក់ជាតិដ៏ធំក្នុងការប្រមូល វិភាគ និងបោះពុម្ពផ្សាយទិន្នន័យប្រជាសាស្ត្រ សេដ្ឋកិច្ច និងសង្គមកិច្ចរបស់ប្រជាជនគ្រប់រូប ដើម្បីជាប្រយោជន៍ដល់ការរៀបចំគោលនយោបាយអភិវឌ្ឍន៍។",
+                q111: "<strong>ចម្លើយត្រឹមត្រូវ៖ A. ខេត្តបន្ទាយមានជ័យ បាត់ដំបង កំពង់ឆ្នាំង កំពង់ធំ ពោធិ៍សាត់ សៀមរាប ឧត្តរមានជ័យ និងប៉ៃលិន</strong><br>តាមចំណាត់ថ្នាក់ភូមិសាស្ត្រសេដ្ឋកិច្ចកម្ពុជា ខេត្តទាំង ៨ នេះត្រូវបានចាត់បញ្ចូលទៅក្នុង «តំបន់បឹងទន្លេសាប»។"
+            };
+
+
+
+
+
+            function startTimer() {
+                const timerElement = document.getElementById('timer');
+
+                timerInterval = setInterval(() => {
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        timerElement.innerHTML = "អស់ពេលកំណត់ហើយ!";
+                        timerElement.classList.add('danger');
+                        checkAnswers(false);
+                    } else {
+                        timeLeft--;
+                        let minutes = Math.floor(timeLeft / 60);
+                        let seconds = timeLeft % 60;
+
+                        minutes = minutes < 10 ? '0' + minutes : minutes;
+                        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                        timerElement.innerHTML = `ពេលវេលានៅសល់៖ ${minutes}:${seconds}`;
+
+                        if (timeLeft <= 30) {
+                            timerElement.classList.add('danger');
+                        }
+                    }
+                }, 1000);
+            }
+
+            function checkAnswers(isManualClick) {
+                if (isSubmitted) return;
+                isSubmitted = true;
+
+                clearInterval(timerInterval);
+
+                document.getElementById('submitBtn').disabled = true;
+                document.querySelectorAll('input[type="radio"]').forEach(input => input.disabled = true);
+
+                const correctAnswers = {
+                    q1: 'A', q2: 'A', q3: 'B', q4: 'A', q5: 'C',
+                    q6: 'A', q7: 'B', q8: 'A', q9: 'A', q10: 'B',
+                    q11: 'B', q12: 'B', q13: 'B', q14: 'A', q15: 'B',
+                    q16: 'A', q17: 'C', q18: 'B', q19: 'C', q20: 'B',
+                    q21: 'B', q22: 'A', q23: 'B', q24: 'A', q25: 'A',
+                    q26: 'A', q27: 'B', q28: 'A', q29: 'B', q30: 'A',
+                    q31: 'B', q32: 'B', q33: 'A', q34: 'B', q35: 'B',
+
+                    q36: 'B', q37: 'A', q38: 'B', q39: 'A', q40: 'B',
+                    q41: 'A', q42: 'B', q43: 'B', q44: 'A', q45: 'A',
+                    q46: 'B', q47: 'B', q48: 'A', q49: 'A', q50: 'B',
+
+                    q51: 'B', q52: 'C', q53: 'A', q54: 'B', q55: 'A',
+                    q56: 'B', q57: 'A', q58: 'A', q59: 'B', q60: 'B',
+                    q61: 'A', q62: 'B', q63: 'C', q64: 'A', q65: 'B',
+
+                    q66: 'A', q67: 'B', q68: 'B', q69: 'A', q70: 'B',
+                    q71: 'B', q72: 'B', q73: 'B', q74: 'B', q75: 'B',
+                    q76: 'B', q77: 'B', q78: 'A', q79: 'B', q80: 'A',
+
+                    q81: 'B', q82: 'A', q83: 'B', q84: 'B', q85: 'A',
+                    q86: 'B', q87: 'A', q88: 'B', q89: 'A', q90: 'B',
+                    q91: 'A', q92: 'C', q93: 'B', q94: 'A', q95: 'B',
+                    q96: 'A', q97: 'B', q98: 'A', q99: 'A', q100: 'A',
+
+                    q101: 'A', q102: 'B', q103: 'B', q104: 'B', q105: 'A', q106: 'B',
+                    q107: 'B', q108: 'A', q109: 'B', q110: 'B', q111: 'A'
+                };
+
+                let score = 0;
+                let totalQuestions = Object.keys(correctAnswers).length;
+
+                for (let key in correctAnswers) {
+                    const correctAnswer = correctAnswers[key];
+                    const selectedInput = document.querySelector(`input[name="${key}"]:checked`);
+                    const allInputs = document.querySelectorAll(`input[name="${key}"]`);
+
+                    allInputs.forEach(input => {
+                        if (input.value === correctAnswer) {
+                            input.parentElement.classList.add('correct');
+                        }
+                    });
+
+                    if (selectedInput) {
+                        if (selectedInput.value === correctAnswer) {
+                            score++;
+                        } else {
+                            selectedInput.parentElement.classList.add('incorrect');
+                        }
+                    }
+
+                    const expDiv = document.getElementById(`exp-${key}`);
+                    if (expDiv && fullAnswersText[key]) {
+                        expDiv.innerHTML = fullAnswersText[key];
+                        expDiv.style.display = "block";
+                    }
+                }
+
+                let percentage = Math.round((score / totalQuestions) * 100);
+                const resultDiv = document.getElementById('result');
+                resultDiv.style.display = "block";
+
+                let statusText = isManualClick ? "ការប្រលងត្រូវបានបញ្ចប់ដោយជោគជ័យ!" : "អស់ពេលកំណត់ធ្វើកិច្ចការហើយ!";
+                resultDiv.innerHTML = `${statusText} <br> អ្នកទទួលបានពិន្ទុ៖ <strong>${score} / ${totalQuestions}</strong> សំណួរ (សមមូលនឹង <strong>${percentage}%</strong>)<br><small style="color:#666; font-size:1rem;">សូមអូសទៅមើលខាងលើវិញ ដើម្បីអានចម្លើយលម្អិតពេញលេញនៃសំណួរនីមួយៗ។</small>`;
+
+                resultDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            startTimer();
+    </script>
+</body>
+
+</html>
